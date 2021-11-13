@@ -1,4 +1,4 @@
-//drawing.c¿¡ ÀÖ´Â ÇÔ¼öµéÀ» ¼±¾ğÇÑ Çì´õÆÄÀÏ
+//drawing.cì— ìˆëŠ” í•¨ìˆ˜ë“¤ì„ ì„ ì–¸í•œ í—¤ë”íŒŒì¼
 
 void drawingBorder();
 void drawingTitle();

@@ -1,19 +1,19 @@
-#define _CRT_SECURE_NO_WARNINGS		//ÀüÃ³¸®±â(#) ÇÁ·Î±×·¥ ½ÇÇà¿¡ »ç¿ëµÇ´Â ¸ÅÅ©·Î¿Í Çì´õÆÄÀÏ ¼±¾ğ
-#include <stdio.h>					//Ç¥ÁØÀÔÃâ·Â ÇÔ¼ö Çì´õÆÄÀÏ
-#include <string.h>					//ÄÜ¼ÖÀÔÃâ·Â ÇÔ¼ö Çì´õÆÄÀÏ
+#define _CRT_SECURE_NO_WARNINGS		//ì „ì²˜ë¦¬ê¸°(#) í”„ë¡œê·¸ë¨ ì‹¤í–‰ì— ì‚¬ìš©ë˜ëŠ” ë§¤í¬ë¡œì™€ í—¤ë”íŒŒì¼ ì„ ì–¸
+#include <stdio.h>					//í‘œì¤€ì…ì¶œë ¥ í•¨ìˆ˜ í—¤ë”íŒŒì¼
+#include <string.h>					//ì½˜ì†”ì…ì¶œë ¥ í•¨ìˆ˜ í—¤ë”íŒŒì¼
 #include <process.h>
 
-#include "console.h"				//console.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
-#include "drawing.h"				//drawing.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
-#include "text.h"					//text.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
+#include "console.h"				//console.h ì‚¬ìš©ì í—¤ë”íŒŒì¼ í¬í•¨
+#include "drawing.h"				//drawing.h ì‚¬ìš©ì í—¤ë”íŒŒì¼ í¬í•¨
+#include "text.h"					//text.h ì‚¬ìš©ì í—¤ë”íŒŒì¼ í¬í•¨
 
-#define WORD_CNT		20			//´Ü¾î ½ÃÀÛ °³¼ö
-#define LEVEL_COUNT		5			//·¹º§´ç ´Ü¾î Áõ°¡ °³¼ö
-#define LEVEL_SPEED		15			//·¹º§´ç ½ºÇÇµå Áõ°¡
-#define MAX_WORD		50			//ÃÖ´ë ´Ü¾î ¼ö
+#define WORD_CNT		20			//ë‹¨ì–´ ì‹œì‘ ê°œìˆ˜
+#define LEVEL_COUNT		5			//ë ˆë²¨ë‹¹ ë‹¨ì–´ ì¦ê°€ ê°œìˆ˜
+#define LEVEL_SPEED		15			//ë ˆë²¨ë‹¹ ìŠ¤í”¼ë“œ ì¦ê°€
+#define MAX_WORD		50			//ìµœëŒ€ ë‹¨ì–´ ìˆ˜
 
-typedef struct fallingWords {		//»ê¼ººñ ´Ü¾î ±¸Á¶Ã¼
-	int x;							//¸â¹ö º¯¼ö : ÁÂÇ¥°ª x y, ´ë±â½Ã°£ wait, Ãâ·Â¿©ºÎ visible, ÀúÀåµÈ ´Ü¾î text[20]
+typedef struct fallingWords {		//ì‚°ì„±ë¹„ ë‹¨ì–´ êµ¬ì¡°ì²´
+	int x;							//ë©¤ë²„ ë³€ìˆ˜ : ì¢Œí‘œê°’ x y, ëŒ€ê¸°ì‹œê°„ wait, ì¶œë ¥ì—¬ë¶€ visible, ì €ì¥ëœ ë‹¨ì–´ text[20]
 	int y;
 	int wait;
 	int visible;					
@@ -24,66 +24,66 @@ void inputWord();
 void game(int lv);
 void gameDisplayReset();
 
-char words[1200][20] = { 0 };		//·£´ı ´Ü¾î ÀúÀå
-FW word[MAX_WORD];					//¶³¾îÁö´Â ´Ü¾î ÀúÀå
+char words[1200][20] = { 0 };		//ëœë¤ ë‹¨ì–´ ì €ì¥
+FW word[MAX_WORD];					//ë–¨ì–´ì§€ëŠ” ë‹¨ì–´ ì €ì¥
 
-CRITICAL_SECTION cs;			//ÀÓ°è±¸¿ª ¼³Á¤
-HANDLE thread1;					//¾²·¹µå 1 : inputWord
-HANDLE thread2;					//¾²·¹µå 2 : game
+CRITICAL_SECTION cs;			//ì„ê³„êµ¬ì—­ ì„¤ì •
+HANDLE thread1;					//ì“°ë ˆë“œ 1 : inputWord
+HANDLE thread2;					//ì“°ë ˆë“œ 2 : game
 
-int score = 0;		//Á¡¼ö
-int life = 3;		//³²Àº »ı¸í
-int count = 0;		//´Ü¾î °³¼ö
-int tp = 0;			//´Ü¾î¸¦ ÀÔ·ÂÇÑ È½¼ö(·¹º§¸¶´Ù ÃÊ±âÈ­)
+int score = 0;		//ì ìˆ˜
+int life = 3;		//ë‚¨ì€ ìƒëª…
+int count = 0;		//ë‹¨ì–´ ê°œìˆ˜
+int tp = 0;			//ë‹¨ì–´ë¥¼ ì…ë ¥í•œ íšŸìˆ˜(ë ˆë²¨ë§ˆë‹¤ ì´ˆê¸°í™”)
 
-//»ê¼ººñ °ÔÀÓÈ­¸éÀ» Ãâ·ÂÇÏ´Â ÇÔ¼ö
+//ì‚°ì„±ë¹„ ê²Œì„í™”ë©´ì„ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 void acidrainGame() {
-	int i = 0, j = 0;				//for ¹İº¹¹®À» »ç¿ëÇÏ±â À§ÇÑ intÇü º¯¼ö i¿Í j ¼±¾ğ ÈÄ 0À¸·Î ÃÊ±âÈ­
+	int i = 0, j = 0;				//for ë°˜ë³µë¬¸ì„ ì‚¬ìš©í•˜ê¸° ìœ„í•œ intí˜• ë³€ìˆ˜ iì™€ j ì„ ì–¸ í›„ 0ìœ¼ë¡œ ì´ˆê¸°í™”
 	FILE *fp;
 	char filepath[255] = { 0 };
 	char user[20] = { 0 };
 	
-	system("cls");		//systemÇÔ¼ö·Î È­¸é ÃÊ±âÈ­
+	system("cls");		//systemí•¨ìˆ˜ë¡œ í™”ë©´ ì´ˆê¸°í™”
 
-	consoleShow();				//»ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö consoleShow ÇÔ¼ö·Î ÄÜ¼ÖÀ» ÁöÁ¤µÈ Å©±â·Î ¿®
-	drawingBorder();			//»ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö·Î Å×µÎ¸® Ãâ·Â
-	drawingIdtag();	//·Î±×ÀÎ ÇÑ ID Ãâ·Â(¹Ì¿Ï¼º)
+	consoleShow();				//ì‚¬ìš©ì ì§€ì • í•¨ìˆ˜ consoleShow í•¨ìˆ˜ë¡œ ì½˜ì†”ì„ ì§€ì •ëœ í¬ê¸°ë¡œ ì—¶
+	drawingBorder();			//ì‚¬ìš©ì ì§€ì • í•¨ìˆ˜ë¡œ í…Œë‘ë¦¬ ì¶œë ¥
+	drawingIdtag();	//ë¡œê·¸ì¸ í•œ ID ì¶œë ¥(ë¯¸ì™„ì„±)
 
 	for (i = 2; i < WIDTH - 2; i++) {
-		gotoxy(i, 3);					//gotoxy ÇÔ¼ö¸¦ ÅëÇØ ÁÂÇ¥ ÀÌµ¿ ÈÄ printf ÇÔ¼ö·Î »ó´Ü¼± ±×¸®±â
+		gotoxy(i, 3);					//gotoxy í•¨ìˆ˜ë¥¼ í†µí•´ ì¢Œí‘œ ì´ë™ í›„ printf í•¨ìˆ˜ë¡œ ìƒë‹¨ì„  ê·¸ë¦¬ê¸°
 		printf("-");
 
 		if (i % 2 == 0) {
-			gotoxy(i, HEIGHT - 5);			//gotoxy ÇÔ¼ö¸¦ ÅëÇØ ÁÂÇ¥ ÀÌµ¿ ÈÄ printf ÇÔ¼ö·Î ÇÏ´Ü¼± ±×¸®±â(if ¹®À» ÅëÇØ ÇÑÄ­ ¾¿ ¶ç¿ö¼­ Ãâ·Â)
+			gotoxy(i, HEIGHT - 5);			//gotoxy í•¨ìˆ˜ë¥¼ í†µí•´ ì¢Œí‘œ ì´ë™ í›„ printf í•¨ìˆ˜ë¡œ í•˜ë‹¨ì„  ê·¸ë¦¬ê¸°(if ë¬¸ì„ í†µí•´ í•œì¹¸ ì”© ë„ì›Œì„œ ì¶œë ¥)
 			printf("~");
 		}
 	}
 
-	gotoxy((WIDTH / 2) - 14, HEIGHT - 4);				//gotoxy ÇÔ¼ö¸¦ ÅëÇØ ÁÂÇ¥ ÀÌµ¿ ÈÄ »ç¿ëÀÚ°¡ ´Ü¾î¸¦ ÀÔ·ÂÇÒ Ä­ Ãâ·Â
+	gotoxy((WIDTH / 2) - 14, HEIGHT - 4);				//gotoxy í•¨ìˆ˜ë¥¼ í†µí•´ ì¢Œí‘œ ì´ë™ í›„ ì‚¬ìš©ìê°€ ë‹¨ì–´ë¥¼ ì…ë ¥í•  ì¹¸ ì¶œë ¥
 	printf("+--------------------------+");
 	gotoxy((WIDTH / 2) - 14, HEIGHT - 3);
 	printf("|                          |");
 	gotoxy((WIDTH / 2) - 14, HEIGHT - 2);
 	printf("+--------------------------+");
 
-	//´Ü¾î°¡ ÀúÀåµÇ¾î ÀÕ´Â ÆÄÀÏÀ» ºÒ·¯¿À±â
-	sprintf(query, "select * from file where events_id='3' and language='eng'");		//sprintf ÇÔ¼ö¸¦ ÅëÇØ query¿¡ Äõ¸®¹®À» ÀúÀå
+	//ë‹¨ì–´ê°€ ì €ì¥ë˜ì–´ ì‡ëŠ” íŒŒì¼ì„ ë¶ˆëŸ¬ì˜¤ê¸°
+	sprintf(query, "select * from file where events_id='3' and language='eng'");		//sprintf í•¨ìˆ˜ë¥¼ í†µí•´ queryì— ì¿¼ë¦¬ë¬¸ì„ ì €ì¥
 
-	mysql_query(connection, query);		//mysql_query ÇÔ¼ö¸¦ ÅëÇØ connection(¿¬°á Á¤º¸)¿¡ Äõ¸®¹® ½ÇÇà(DB¿¡ ÀúÀåµÇ¾î ÀÖ´Â ´Ü¾î ÆÄÀÏ Á¶È¸)
+	mysql_query(connection, query);		//mysql_query í•¨ìˆ˜ë¥¼ í†µí•´ connection(ì—°ê²° ì •ë³´)ì— ì¿¼ë¦¬ë¬¸ ì‹¤í–‰(DBì— ì €ì¥ë˜ì–´ ìˆëŠ” ë‹¨ì–´ íŒŒì¼ ì¡°íšŒ)
 
-	result = mysql_store_result(connection);			//result¿¡ mysql_store_resultÇÔ¼ö¸¦ »ç¿ëÇÏ¿© connection(¿¬°áÁ¤º¸)ÀÇ ½ÇÇà °á°ú¸¦ ÀúÀå
+	result = mysql_store_result(connection);			//resultì— mysql_store_resultí•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ connection(ì—°ê²°ì •ë³´)ì˜ ì‹¤í–‰ ê²°ê³¼ë¥¼ ì €ì¥
 
-	row = mysql_fetch_row(result);						//½ÇÇà°á°ú¸¦ ÀĞ¾î¿È
+	row = mysql_fetch_row(result);						//ì‹¤í–‰ê²°ê³¼ë¥¼ ì½ì–´ì˜´
 
-	sprintf(filepath, "»ê¼ººñ °ÔÀÓ\\%s", row[3]);			//¹è¿­¿¡ DB¿¡ ÀúÀåµÇ¾î ÀÖ´Â ÆÄÀÏ¸í°ú ÆÄÀÏ °æ·Î ÀúÀå
+	sprintf(filepath, "ì‚°ì„±ë¹„ ê²Œì„\\%s", row[3]);			//ë°°ì—´ì— DBì— ì €ì¥ë˜ì–´ ìˆëŠ” íŒŒì¼ëª…ê³¼ íŒŒì¼ ê²½ë¡œ ì €ì¥
 
 	if ((fp = fopen(filepath, "r")) == NULL) {
-		fprintf(stderr, "ÆÄÀÏ ¿­±â ½ÇÆĞ!\n");
+		fprintf(stderr, "íŒŒì¼ ì—´ê¸° ì‹¤íŒ¨!\n");
 		return;
 	}
 
 	i = 0;
-	while (!feof(fp)) {											//´ÙÀ½ ÁÙÀÌ ÀÖÀ» °æ¿ì ¹®ÀåÀ» ÀĞ¾î¿Â´Ù
+	while (!feof(fp)) {											//ë‹¤ìŒ ì¤„ì´ ìˆì„ ê²½ìš° ë¬¸ì¥ì„ ì½ì–´ì˜¨ë‹¤
 		j = 0;
 		while (!feof(fp)) {
 			words[i][j] = fgetc(fp);
@@ -96,35 +96,35 @@ void acidrainGame() {
 		i++;
 	}
 	
-	//Àü¿ªº¯¼ö ÃÊ±âÈ­
-	score = 0;		//Á¡¼ö
-	life = 3;		//³²Àº »ı¸í
-	count = 0;		//´Ü¾î °³¼ö
-	tp = 0;			//´Ü¾î¸¦ ÀÔ·ÂÇÑ È½¼ö(·¹º§¸¶´Ù ÃÊ±âÈ­)
+	//ì „ì—­ë³€ìˆ˜ ì´ˆê¸°í™”
+	score = 0;		//ì ìˆ˜
+	life = 3;		//ë‚¨ì€ ìƒëª…
+	count = 0;		//ë‹¨ì–´ ê°œìˆ˜
+	tp = 0;			//ë‹¨ì–´ë¥¼ ì…ë ¥í•œ íšŸìˆ˜(ë ˆë²¨ë§ˆë‹¤ ì´ˆê¸°í™”)
 
-	//¾²·¹µå ±¸Çö
-	InitializeCriticalSection(&cs);															//ÀÓ°è±¸¿ª ¼³Á¤
-	thread1 = _beginthreadex(NULL, 0, (_beginthreadex_proc_type)inputWord, NULL, 0, NULL);	//¾ÆÀÌµğ¸¦ ÀÔ·Â¹Ş´Â ¾²·¹µå1
-	thread2 = _beginthreadex(NULL, 0, (_beginthreadex_proc_type)game, (void *)1, 0, NULL);	//´Ü¾î¸¦ Ãâ·ÂÇÏ´Â ¾²·¹µå2
-	WaitForSingleObject(thread1, INFINITE);													//¾²·¹µå 1 ´ë±â
-	DeleteCriticalSection(&cs);																//ÀÓ°è±¸¿ª ÇØÁ¦
+	//ì“°ë ˆë“œ êµ¬í˜„
+	InitializeCriticalSection(&cs);															//ì„ê³„êµ¬ì—­ ì„¤ì •
+	thread1 = _beginthreadex(NULL, 0, (_beginthreadex_proc_type)inputWord, NULL, 0, NULL);	//ì•„ì´ë””ë¥¼ ì…ë ¥ë°›ëŠ” ì“°ë ˆë“œ1
+	thread2 = _beginthreadex(NULL, 0, (_beginthreadex_proc_type)game, (void *)1, 0, NULL);	//ë‹¨ì–´ë¥¼ ì¶œë ¥í•˜ëŠ” ì“°ë ˆë“œ2
+	WaitForSingleObject(thread1, INFINITE);													//ì“°ë ˆë“œ 1 ëŒ€ê¸°
+	DeleteCriticalSection(&cs);																//ì„ê³„êµ¬ì—­ í•´ì œ
 	return 0;
 }
 
-//»ê¼ººñ °ÔÀÓ ´Ü¾î¸¦ ÀÔ·Â¹Ş´Â ÇÔ¼ö
+//ì‚°ì„±ë¹„ ê²Œì„ ë‹¨ì–´ë¥¼ ì…ë ¥ë°›ëŠ” í•¨ìˆ˜
 void inputWord() {
 	int i = 0;
-	int cnt = 0, key = 0;		//»ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ key °ªÀ» ÀúÀåÇÒ intÇü º¯¼ö key ¼±¾ğ ÈÄ 0À¸·Î ÃÊ±âÈ­
-	char user[20] = { 0 };		//»ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ ¹®ÀÚ¿­À» ÀúÀåÇÏ±â À§ÇÑ charÇü ¹è¿­ userÀ» ¼±¾ğ ÈÄ 0À¸·Î ÃÊ±âÈ­(ÃÖ´ë ÀÔ·Â Å©±â20)
+	int cnt = 0, key = 0;		//ì‚¬ìš©ìê°€ ì…ë ¥í•œ key ê°’ì„ ì €ì¥í•  intí˜• ë³€ìˆ˜ key ì„ ì–¸ í›„ 0ìœ¼ë¡œ ì´ˆê¸°í™”
+	char user[20] = { 0 };		//ì‚¬ìš©ìê°€ ì…ë ¥í•œ ë¬¸ìì—´ì„ ì €ì¥í•˜ê¸° ìœ„í•œ charí˜• ë°°ì—´ userì„ ì„ ì–¸ í›„ 0ìœ¼ë¡œ ì´ˆê¸°í™”(ìµœëŒ€ ì…ë ¥ í¬ê¸°20)
 	
 	while (1) {
 		EnterCriticalSection(&cs);
 
 		if (kbhit() != 0) {
-			key = _getch();			//º¯¼ö key¿¡ »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ Å° °ªÀ» ÀúÀå
+			key = _getch();			//ë³€ìˆ˜ keyì— ì‚¬ìš©ìê°€ ì…ë ¥í•œ í‚¤ ê°’ì„ ì €ì¥
 			
-			if (key == ENTER_KEY || key == 32) {		//ENTER Å°(13) or SPACE BAR(32)
-				//ÅØ½ºÆ®¹Ú½º ÃÊ±âÈ­(¿Ï·á) + Ä«¿îÆ® ´õÇÏ±â(¿Ï·á) + ±âÁ¸ Ç¥½Ã ´Ü¾î Áö¿ì±â(¿Ï·á)
+			if (key == ENTER_KEY || key == 32) {		//ENTER í‚¤(13) or SPACE BAR(32)
+				//í…ìŠ¤íŠ¸ë°•ìŠ¤ ì´ˆê¸°í™”(ì™„ë£Œ) + ì¹´ìš´íŠ¸ ë”í•˜ê¸°(ì™„ë£Œ) + ê¸°ì¡´ í‘œì‹œ ë‹¨ì–´ ì§€ìš°ê¸°(ì™„ë£Œ)
 				gotoxy((WIDTH / 2) - 14, HEIGHT - 3);
 				printf("|                          |");
 				for (i = 0; i < count; i++) {
@@ -140,26 +140,26 @@ void inputWord() {
 				}
 				cnt = 0;
 			}
-			else if (key == ESC_KEY) {	// ESC Å° ÀÔ·Â½Ã -1 ¹İÈ¯
-				//°ÔÀÓ Á¾·á(¸ŞÀÎÈ­¸éÀ¸·Î µ¹¾Æ°¥ °Í)
+			else if (key == ESC_KEY) {	// ESC í‚¤ ì…ë ¥ì‹œ -1 ë°˜í™˜
+				//ê²Œì„ ì¢…ë£Œ(ë©”ì¸í™”ë©´ìœ¼ë¡œ ëŒì•„ê°ˆ ê²ƒ)
 				TerminateThread(thread2, 0);
 				TerminateThread(thread1, 0);
 			}
-			else if (key == BACKSPACE_KEY) {				// BACKSPACE(8) ÀÔ·Â ½Ã ¹®ÀÚ Áö¿ì±â
+			else if (key == BACKSPACE_KEY) {				// BACKSPACE(8) ì…ë ¥ ì‹œ ë¬¸ì ì§€ìš°ê¸°
 				if (cnt != 0) {
 					gotoxy((WIDTH / 2) - 12 + cnt, HEIGHT - 3);
 
-					putchar('\b');				//\b(¹é½ºÆäÀÌ½º)¸¦ »ç¿ëÇÏ¿© ÇÑ ºñÆ® µÚ·Î ÀÌµ¿
-					putchar(' ');				// È­¸é¿¡ º° Ç¥½Ã
-					putchar('\b');				//\b(¹é½ºÆäÀÌ½º)¸¦ »ç¿ëÇÏ¿© ÇÑ ºñÆ® µÚ·Î ÀÌµ¿
-					user[cnt--] = ' ';			//°ø¹é ÀúÀå
-					continue;					//´ÙÀ½ ÀÔ·Â ¹ŞÀ½
+					putchar('\b');				//\b(ë°±ìŠ¤í˜ì´ìŠ¤)ë¥¼ ì‚¬ìš©í•˜ì—¬ í•œ ë¹„íŠ¸ ë’¤ë¡œ ì´ë™
+					putchar(' ');				// í™”ë©´ì— ë³„ í‘œì‹œ
+					putchar('\b');				//\b(ë°±ìŠ¤í˜ì´ìŠ¤)ë¥¼ ì‚¬ìš©í•˜ì—¬ í•œ ë¹„íŠ¸ ë’¤ë¡œ ì´ë™
+					user[cnt--] = ' ';			//ê³µë°± ì €ì¥
+					continue;					//ë‹¤ìŒ ì…ë ¥ ë°›ìŒ
 				}
 			}
-			else if ((cnt >= 0 && cnt <= 20) && (key >= 'a' && key <= 'z') || (key >= 'A' && key <= 'Z')) {		//¿µ¾î¸¸ ÀÔ·Â¹Şµµ·Ï ÇÔ
+			else if ((cnt >= 0 && cnt <= 20) && (key >= 'a' && key <= 'z') || (key >= 'A' && key <= 'Z')) {		//ì˜ì–´ë§Œ ì…ë ¥ë°›ë„ë¡ í•¨
 				gotoxy((WIDTH / 2) - 12 + cnt, HEIGHT - 3);
-				user[cnt++] = (char)key;				// ¹öÆÛ¿¡ ±ÛÀÚ ÀúÀåÇÏ°í Ä«¿îÆ® 1 Áõ°¡  
-				putchar(key);							// È­¸é¿¡ ¹®ÀÚ Ç¥½Ã
+				user[cnt++] = (char)key;				// ë²„í¼ì— ê¸€ì ì €ì¥í•˜ê³  ì¹´ìš´íŠ¸ 1 ì¦ê°€  
+				putchar(key);							// í™”ë©´ì— ë¬¸ì í‘œì‹œ
 			}
 			
 		}
@@ -173,27 +173,27 @@ void game() {
 	int lv = 1;
 	int speed;
 	int i = 0, j = 0, check = 1, key = 0;
-	int r = 0;		//·£´ı º¯¼ö
+	int r = 0;		//ëœë¤ ë³€ìˆ˜
 
 lvUp:
 
 	speed = 1000 - (lv - 1) * LEVEL_SPEED;
 	count = WORD_CNT + (lv - 1) * LEVEL_COUNT;
 
-	//´Ü¾î ÃÖ´ë°³¼ö Á¶Àı
+	//ë‹¨ì–´ ìµœëŒ€ê°œìˆ˜ ì¡°ì ˆ
 	if (count >= MAX_WORD)
 		count = MAX_WORD - 1;
 
 	srand((unsigned int)time(NULL));
-	//´Ü¾î ÃÊ±âÈ­
+	//ë‹¨ì–´ ì´ˆê¸°í™”
 	for (i = 0; i < count; i++) {
-		r = rand() % (WIDTH - 20) + 4;					//x°ª ÁöÁ¤
+		r = rand() % (WIDTH - 20) + 4;					//xê°’ ì§€ì •
 		word[i].x = r;
 
-		r = rand() % (speed / 20);					//wait°ª ÁöÁ¤(ÇÑ²¨¹ø¿¡ ´Ü¾î°¡ ³»·Á°¡Áö ¾Ê°í Àû´çÇÑ ÅÒÀ» µÎ¾î ³»·Á¿Àµµ·Ï ÇÏ±â À§ÇØ)
+		r = rand() % (speed / 20);					//waitê°’ ì§€ì •(í•œêº¼ë²ˆì— ë‹¨ì–´ê°€ ë‚´ë ¤ê°€ì§€ ì•Šê³  ì ë‹¹í•œ í…€ì„ ë‘ì–´ ë‚´ë ¤ì˜¤ë„ë¡ í•˜ê¸° ìœ„í•´)
 		word[i].wait = r;
 
-		word[i].y = 4;						//y°ªÀº 0¿¡¼­ ¼øÂ÷ÀûÀ¸·Î Áõ°¡
+		word[i].y = 4;						//yê°’ì€ 0ì—ì„œ ìˆœì°¨ì ìœ¼ë¡œ ì¦ê°€
 
 		word[i].visible = 1;
 
@@ -201,9 +201,9 @@ lvUp:
 		sprintf(word[i].text, words[r]);
 	}
 	
-	// °ÔÀÓ ·çÇÁ
+	// ê²Œì„ ë£¨í”„
 	while (check) {
-		//´Ü¾î Ãâ·Â
+		//ë‹¨ì–´ ì¶œë ¥
 		for (i = 0; i < count; i++) {
 			if (word[i].wait == 0 && word[i].visible == 1) {
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
@@ -213,7 +213,7 @@ lvUp:
 		}
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 
-		//´Ü¾î y°ª ³»¸®±â
+		//ë‹¨ì–´ yê°’ ë‚´ë¦¬ê¸°
 		for (i = 0; i < count; i++)
 		{
 			if (word[i].wait == 0) {
@@ -230,7 +230,7 @@ lvUp:
 			goto lvUp;
 		}
 
-		//»ı¸í Ã¼Å©
+		//ìƒëª… ì²´í¬
 		for (i = 0; i < count; i++) {
 			if ((word[i].y >= HEIGHT - 4) && (word[i].visible == 1)) {
 				life--;
@@ -241,21 +241,21 @@ lvUp:
 
 		for (i = 2; i < WIDTH - 2; i++) {
 			if (i % 2 == 0) {
-				gotoxy(i, HEIGHT - 5);			//gotoxy ÇÔ¼ö¸¦ ÅëÇØ ÁÂÇ¥ ÀÌµ¿ ÈÄ printf ÇÔ¼ö·Î ÇÏ´Ü¼± ±×¸®±â(if ¹®À» ÅëÇØ ÇÑÄ­ ¾¿ ¶ç¿ö¼­ Ãâ·Â)
+				gotoxy(i, HEIGHT - 5);			//gotoxy í•¨ìˆ˜ë¥¼ í†µí•´ ì¢Œí‘œ ì´ë™ í›„ printf í•¨ìˆ˜ë¡œ í•˜ë‹¨ì„  ê·¸ë¦¬ê¸°(if ë¬¸ì„ í†µí•´ í•œì¹¸ ì”© ë„ì›Œì„œ ì¶œë ¥)
 				printf("~");
 			}
 			else {
-				gotoxy(i, HEIGHT - 5);			//gotoxy ÇÔ¼ö¸¦ ÅëÇØ ÁÂÇ¥ ÀÌµ¿ ÈÄ printf ÇÔ¼ö·Î ÇÏ´Ü¼± ±×¸®±â(if ¹®À» ÅëÇØ ÇÑÄ­ ¾¿ ¶ç¿ö¼­ Ãâ·Â)
+				gotoxy(i, HEIGHT - 5);			//gotoxy í•¨ìˆ˜ë¥¼ í†µí•´ ì¢Œí‘œ ì´ë™ í›„ printf í•¨ìˆ˜ë¡œ í•˜ë‹¨ì„  ê·¸ë¦¬ê¸°(if ë¬¸ì„ í†µí•´ í•œì¹¸ ì”© ë„ì›Œì„œ ì¶œë ¥)
 				printf(" ");
 			}
 		}
 
-		//Á¡¼ö ¹× ³²Àº »ı¸í Ãâ·Â
-		gotoxy(5, 2);				//gotoxy ÇÔ¼ö¸¦ ÅëÇØ ÁÂÇ¥ ÀÌµ¿ ÈÄ Á¡¼ö Ãâ·Â
+		//ì ìˆ˜ ë° ë‚¨ì€ ìƒëª… ì¶œë ¥
+		gotoxy(5, 2);				//gotoxy í•¨ìˆ˜ë¥¼ í†µí•´ ì¢Œí‘œ ì´ë™ í›„ ì ìˆ˜ ì¶œë ¥
 		printf("LEVEL %2d", lv);
-		gotoxy(5, HEIGHT - 3);				//gotoxy ÇÔ¼ö¸¦ ÅëÇØ ÁÂÇ¥ ÀÌµ¿ ÈÄ Á¡¼ö Ãâ·Â
+		gotoxy(5, HEIGHT - 3);				//gotoxy í•¨ìˆ˜ë¥¼ í†µí•´ ì¢Œí‘œ ì´ë™ í›„ ì ìˆ˜ ì¶œë ¥
 		printf("SCORE : %5d", score);
-		gotoxy(WIDTH - 15, HEIGHT - 3);		//gotoxy ÇÔ¼ö¸¦ ÅëÇØ ÁÂÇ¥ ÀÌµ¿ ÈÄ ³²Àº »ı¸í Ãâ·Â
+		gotoxy(WIDTH - 15, HEIGHT - 3);		//gotoxy í•¨ìˆ˜ë¥¼ í†µí•´ ì¢Œí‘œ ì´ë™ í›„ ë‚¨ì€ ìƒëª… ì¶œë ¥
 		printf("LIFE : %1d", life);
 		LeaveCriticalSection(&cs);
 
@@ -267,13 +267,13 @@ lvUp:
 			gotoxy((WIDTH / 2) - 25, (HEIGHT / 2) - 2);
 			printf("|                                               |");
 			gotoxy((WIDTH / 2) - 25, (HEIGHT / 2) - 1);
-			printf("|          °ÔÀÓ Á¡¼ö°¡ ÀúÀåµÇ¾ú½À´Ï´Ù           |");
+			printf("|          ê²Œì„ ì ìˆ˜ê°€ ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤           |");
 			gotoxy((WIDTH / 2) - 25, (HEIGHT / 2));
 			printf("|                                               |");
 			gotoxy((WIDTH / 2) - 25, (HEIGHT / 2) + 1);
 			printf("|                                               |");
 			gotoxy((WIDTH / 2) - 25, (HEIGHT / 2) + 2);
-			printf("|     ¾Æ¹« Å°³ª ´©¸£½Ã¸é ¸Ş´º·Î µ¹¾Æ°©´Ï´Ù.     |");
+			printf("|     ì•„ë¬´ í‚¤ë‚˜ ëˆ„ë¥´ì‹œë©´ ë©”ë‰´ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.     |");
 			gotoxy((WIDTH / 2) - 25, (HEIGHT / 2) + 3);
 			printf("|                                               |");
 			gotoxy((WIDTH / 2) - 25, (HEIGHT / 2) + 4);
@@ -281,9 +281,9 @@ lvUp:
 
 			_getch();
 
-			sprintf(query, "insert into typing VALUES ('%s', 3, %d, %d, curdate())", login_id, score, NULL);		//sprintf ÇÔ¼ö¸¦ ÅëÇØ query¿¡ Äõ¸®¹®À» ÀúÀå
+			sprintf(query, "insert into typing VALUES ('%s', 3, %d, %d, curdate())", login_id, score, NULL);		//sprintf í•¨ìˆ˜ë¥¼ í†µí•´ queryì— ì¿¼ë¦¬ë¬¸ì„ ì €ì¥
 
-			mysql_query(connection, query);		//mysql_query ÇÔ¼ö¸¦ ÅëÇØ connection(¿¬°á Á¤º¸)¿¡ Äõ¸®¹® ½ÇÇà(insert¹®À¸·Î Å¸ÀÌÇÎ Á¤º¸ ÀúÀå)
+			mysql_query(connection, query);		//mysql_query í•¨ìˆ˜ë¥¼ í†µí•´ connection(ì—°ê²° ì •ë³´)ì— ì¿¼ë¦¬ë¬¸ ì‹¤í–‰(insertë¬¸ìœ¼ë¡œ íƒ€ì´í•‘ ì •ë³´ ì €ì¥)
 
 			TerminateThread(thread1, 0);
 			TerminateThread(thread2, 0);

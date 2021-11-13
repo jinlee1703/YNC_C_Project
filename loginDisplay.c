@@ -1,60 +1,60 @@
-#define _CRT_SECURE_NO_WARNINGS		//ÀüÃ³¸®±â(#) ÇÁ·Î±×·¥ ½ÇÇà¿¡ »ç¿ëµÇ´Â ¸ÅÅ©·Î¿Í Çì´õÆÄÀÏ ¼±¾ð
-#include <stdio.h>					//Ç¥ÁØÀÔÃâ·Â ÇÔ¼ö Çì´õÆÄÀÏ
-#include <conio.h>					//ÄÜ¼ÖÀÔÃâ·Â ÇÔ¼ö Çì´õÆÄÀÏ
-#include <string.h>					//Ç¥ÁØ ¹®ÀÚ¿­ ÇÔ¼ö Çì´õÆÄÀÏ
-#include <Windows.h>				//À©µµ¿ì ÀÀ¿ë ÇÁ·Î±×·¥À» À§ÇÑ Çì´õÆÄÀÏ
+#define _CRT_SECURE_NO_WARNINGS		//ì „ì²˜ë¦¬ê¸°(#) í”„ë¡œê·¸ëž¨ ì‹¤í–‰ì— ì‚¬ìš©ë˜ëŠ” ë§¤í¬ë¡œì™€ í—¤ë”íŒŒì¼ ì„ ì–¸
+#include <stdio.h>					//í‘œì¤€ìž…ì¶œë ¥ í•¨ìˆ˜ í—¤ë”íŒŒì¼
+#include <conio.h>					//ì½˜ì†”ìž…ì¶œë ¥ í•¨ìˆ˜ í—¤ë”íŒŒì¼
+#include <string.h>					//í‘œì¤€ ë¬¸ìžì—´ í•¨ìˆ˜ í—¤ë”íŒŒì¼
+#include <Windows.h>				//ìœˆë„ìš° ì‘ìš© í”„ë¡œê·¸ëž¨ì„ ìœ„í•œ í—¤ë”íŒŒì¼
 
-#include "main.h"			//main.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
-#include "console.h"		//console.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
-#include "drawing.h"		//drawing.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
-#include "text.h"			//text.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
+#include "main.h"			//main.h ì‚¬ìš©ìž í—¤ë”íŒŒì¼ í¬í•¨
+#include "console.h"		//console.h ì‚¬ìš©ìž í—¤ë”íŒŒì¼ í¬í•¨
+#include "drawing.h"		//drawing.h ì‚¬ìš©ìž í—¤ë”íŒŒì¼ í¬í•¨
+#include "text.h"			//text.h ì‚¬ìš©ìž í—¤ë”íŒŒì¼ í¬í•¨
 
 
-//·Î±×ÀÎ È­¸éÀ» Ãâ·ÂÇÏ°í DB¿¡ ÀúÀåµÇ¾îÀÖ´Â È¸¿øÁ¤º¸¸¦ ÅëÇØ ·Î±×ÀÎ ¼º°ø ¿©ºÎ¸¦ ¹ÝÈ¯ÇÏ´Â »ç¿ëÀÚ ÇÔ¼ö
+//ë¡œê·¸ì¸ í™”ë©´ì„ ì¶œë ¥í•˜ê³  DBì— ì €ìž¥ë˜ì–´ìžˆëŠ” íšŒì›ì •ë³´ë¥¼ í†µí•´ ë¡œê·¸ì¸ ì„±ê³µ ì—¬ë¶€ë¥¼ ë°˜í™˜í•˜ëŠ” ì‚¬ìš©ìž í•¨ìˆ˜
 int loginDisplay() {
-	char id[255] = { 0 };		//ÀÔ·ÂÇÑ id¸¦ ÀúÀåÇÒ charÇü ¹è¿­ id¸¦ Å©±â 255·Î ¼±¾ðÇÏ¿© 0À¸·Î ÃÊ±âÈ­
-	char pw[255] = { 0 };		//ÀÔ·ÂÇÑ id¸¦ ÀúÀåÇÒ charÇü ¹è¿­ id¸¦ Å©±â 255·Î ¼±¾ðÇÏ¿© 0À¸·Î ÃÊ±âÈ­
+	char id[255] = { 0 };		//ìž…ë ¥í•œ idë¥¼ ì €ìž¥í•  charí˜• ë°°ì—´ idë¥¼ í¬ê¸° 255ë¡œ ì„ ì–¸í•˜ì—¬ 0ìœ¼ë¡œ ì´ˆê¸°í™”
+	char pw[255] = { 0 };		//ìž…ë ¥í•œ idë¥¼ ì €ìž¥í•  charí˜• ë°°ì—´ idë¥¼ í¬ê¸° 255ë¡œ ì„ ì–¸í•˜ì—¬ 0ìœ¼ë¡œ ì´ˆê¸°í™”
 
-	system("cls");				//systemÇÔ¼ö·Î È­¸é ÃÊ±âÈ­
+	system("cls");				//systemí•¨ìˆ˜ë¡œ í™”ë©´ ì´ˆê¸°í™”
 
-	consoleShow();			//»ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö consoleShow ÇÔ¼ö·Î ÄÜ¼ÖÀ» ÁöÁ¤µÈ Å©±â·Î ¿®
-	drawingBorder();		//»ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö·Î Å×µÎ¸® Ãâ·Â
-	drawingTitle();			//»ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö·Î ÇÁ·Î±×·¥ Á¦¸ñ Ãâ·Â
-	drawingNameTag();			//»ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö·Î ÇÁ·Î±×·¥ ÀÛ¼ºÀÚÀÇ ÇÐ¹ø, ÀÌ¸§ Ãâ·Â
+	consoleShow();			//ì‚¬ìš©ìž ì§€ì • í•¨ìˆ˜ consoleShow í•¨ìˆ˜ë¡œ ì½˜ì†”ì„ ì§€ì •ëœ í¬ê¸°ë¡œ ì—¶
+	drawingBorder();		//ì‚¬ìš©ìž ì§€ì • í•¨ìˆ˜ë¡œ í…Œë‘ë¦¬ ì¶œë ¥
+	drawingTitle();			//ì‚¬ìš©ìž ì§€ì • í•¨ìˆ˜ë¡œ í”„ë¡œê·¸ëž¨ ì œëª© ì¶œë ¥
+	drawingNameTag();			//ì‚¬ìš©ìž ì§€ì • í•¨ìˆ˜ë¡œ í”„ë¡œê·¸ëž¨ ìž‘ì„±ìžì˜ í•™ë²ˆ, ì´ë¦„ ì¶œë ¥
 
-	gotoxy((WIDTH / 2) - 30, (HEIGHT / 2) - 8);											//gotoxy ÇÔ¼ö·Î Ãâ·ÂÇÒ È­¸é ¼³¸íÀ» Ãâ·ÂÇÒ À§Ä¡·Î ÀÌµ¿ÇÏ°í printf ÇÔ¼ö·Î Ãâ·Â
-	printf("°¢ Ç×¸ñÀ» ÀÔ·ÂÇÏ°í ENTER Å° ÀÔ·Â ½Ã ´ÙÀ½ Ç×¸ñÀ¸·Î ÀÌµ¿ÇÕ´Ï´Ù.");
+	gotoxy((WIDTH / 2) - 30, (HEIGHT / 2) - 8);											//gotoxy í•¨ìˆ˜ë¡œ ì¶œë ¥í•  í™”ë©´ ì„¤ëª…ì„ ì¶œë ¥í•  ìœ„ì¹˜ë¡œ ì´ë™í•˜ê³  printf í•¨ìˆ˜ë¡œ ì¶œë ¥
+	printf("ê° í•­ëª©ì„ ìž…ë ¥í•˜ê³  ENTER í‚¤ ìž…ë ¥ ì‹œ ë‹¤ìŒ í•­ëª©ìœ¼ë¡œ ì´ë™í•©ë‹ˆë‹¤.");
 
-	drawingTextBox(16, "¾ÆÀÌµð : ");		//¾ÆÀÌµð¸¦ ÀÔ·ÂÇÒ ÅØ½ºÆ®¹Ú½º Ãâ·Â
-	drawingTextBox(21, "ºñ¹Ð¹øÈ£ : ");	//ºñ¹Ð¹øÈ£¸¦ ÀÔ·ÂÇÒ ÅØ½ºÆ®¹Ú½º Ãâ·Â
+	drawingTextBox(16, "ì•„ì´ë”” : ");		//ì•„ì´ë””ë¥¼ ìž…ë ¥í•  í…ìŠ¤íŠ¸ë°•ìŠ¤ ì¶œë ¥
+	drawingTextBox(21, "ë¹„ë°€ë²ˆí˜¸ : ");	//ë¹„ë°€ë²ˆí˜¸ë¥¼ ìž…ë ¥í•  í…ìŠ¤íŠ¸ë°•ìŠ¤ ì¶œë ¥
 
-	gotoxy((WIDTH / 2) - 11, 16);			//»ç¿ëÀÚ ÇÔ¼ö gotoxy ÇÔ¼ö·Î ¾ÆÀÌµð¸¦ ÀÔ·Â¹ÞÀ» À§Ä¡·Î ÀÌµ¿
-	if (get_id(id) == -1)			//»ç¿ëÀÚ ÇÔ¼ö get_id¸¦ ÅëÇØ ¾ÆÀÌµð¸¦ ÀÔ·Â¹Þ°í ¹ÝÈ¯°ªÀÌ -1(ESC Å° ÀÔ·Â)ÀÌ¸é ·Î±×ÀÎ È­¸é Á¾·á(¸ÞÀÎ È­¸éÀ¸·Î ÀÌµ¿)
+	gotoxy((WIDTH / 2) - 11, 16);			//ì‚¬ìš©ìž í•¨ìˆ˜ gotoxy í•¨ìˆ˜ë¡œ ì•„ì´ë””ë¥¼ ìž…ë ¥ë°›ì„ ìœ„ì¹˜ë¡œ ì´ë™
+	if (get_id(id) == -1)			//ì‚¬ìš©ìž í•¨ìˆ˜ get_idë¥¼ í†µí•´ ì•„ì´ë””ë¥¼ ìž…ë ¥ë°›ê³  ë°˜í™˜ê°’ì´ -1(ESC í‚¤ ìž…ë ¥)ì´ë©´ ë¡œê·¸ì¸ í™”ë©´ ì¢…ë£Œ(ë©”ì¸ í™”ë©´ìœ¼ë¡œ ì´ë™)
 		return 1;
 
-	gotoxy((WIDTH / 2) - 11, 21);			//»ç¿ëÀÚ ÇÔ¼ö gotoxy ÇÔ¼ö·Î ºñ¹Ð¹øÈ£¸¦ ÀÔ·Â¹ÞÀ» À§Ä¡·Î ÀÌµ¿
-	if (get_pw(pw) == -1)			//»ç¿ëÀÚ ÇÔ¼ö get_pw¸¦ ÅëÇØ ºñ¹Ð¹øÈ£¸¦ ÀÔ·Â¹Þ°í ¹ÝÈ¯°ªÀÌ -1(ESC Å° ÀÔ·Â)ÀÌ¸é ·Î±×ÀÎ È­¸é Á¾·á(¸ÞÀÎ È­¸éÀ¸·Î ÀÌµ¿)
+	gotoxy((WIDTH / 2) - 11, 21);			//ì‚¬ìš©ìž í•¨ìˆ˜ gotoxy í•¨ìˆ˜ë¡œ ë¹„ë°€ë²ˆí˜¸ë¥¼ ìž…ë ¥ë°›ì„ ìœ„ì¹˜ë¡œ ì´ë™
+	if (get_pw(pw) == -1)			//ì‚¬ìš©ìž í•¨ìˆ˜ get_pwë¥¼ í†µí•´ ë¹„ë°€ë²ˆí˜¸ë¥¼ ìž…ë ¥ë°›ê³  ë°˜í™˜ê°’ì´ -1(ESC í‚¤ ìž…ë ¥)ì´ë©´ ë¡œê·¸ì¸ í™”ë©´ ì¢…ë£Œ(ë©”ì¸ í™”ë©´ìœ¼ë¡œ ì´ë™)
 		return 1;
 
-	gotoxy((WIDTH / 2) - 36, 31);			//gotoxy¸¦ ÅëÇØ ·Î±×ÀÎ ¼º°ø ¿©ºÎ¸¦ Ãâ·ÂÇÒ À§Ä¡·Î ÀÌµ¿
+	gotoxy((WIDTH / 2) - 36, 31);			//gotoxyë¥¼ í†µí•´ ë¡œê·¸ì¸ ì„±ê³µ ì—¬ë¶€ë¥¼ ì¶œë ¥í•  ìœ„ì¹˜ë¡œ ì´ë™
 
-	sprintf(query, "select * from member where member_id='%s' and member_pw='%s'", id, pw);		//sprintf ÇÔ¼ö¸¦ ÅëÇØ query¿¡ Äõ¸®¹®À» ÀúÀå
+	sprintf(query, "select * from member where member_id='%s' and member_pw='%s'", id, pw);		//sprintf í•¨ìˆ˜ë¥¼ í†µí•´ queryì— ì¿¼ë¦¬ë¬¸ì„ ì €ìž¥
 
-	mysql_query(connection, query);		//mysql_query ÇÔ¼ö¸¦ ÅëÇØ connection(¿¬°á Á¤º¸)¿¡ Äõ¸®¹® ½ÇÇà(select¹®À» ÅëÇØ ÀÔ·ÂÇÑ id¿Í pw°¡ ÀÏÄ¡ÇÏ´Â È¸¿øÀÌ ÀÖ´ÂÁö È®ÀÎ)
+	mysql_query(connection, query);		//mysql_query í•¨ìˆ˜ë¥¼ í†µí•´ connection(ì—°ê²° ì •ë³´)ì— ì¿¼ë¦¬ë¬¸ ì‹¤í–‰(selectë¬¸ì„ í†µí•´ ìž…ë ¥í•œ idì™€ pwê°€ ì¼ì¹˜í•˜ëŠ” íšŒì›ì´ ìžˆëŠ”ì§€ í™•ì¸)
 
-	result = mysql_store_result(connection);			//result¿¡ mysql_store_resultÇÔ¼ö¸¦ »ç¿ëÇÏ¿© connection(¿¬°áÁ¤º¸)ÀÇ ½ÇÇà °á°ú¸¦ ÀúÀå
+	result = mysql_store_result(connection);			//resultì— mysql_store_resultí•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ connection(ì—°ê²°ì •ë³´)ì˜ ì‹¤í–‰ ê²°ê³¼ë¥¼ ì €ìž¥
 
-	if (mysql_num_rows(result) == 1) {			//strcmp ÇÔ¼ö¸¦ ÅëÇØ id¿Í pw°ªÀÌ Á¸ÀçÇÏ´ÂÁö ºñ±³
+	if (mysql_num_rows(result) == 1) {			//strcmp í•¨ìˆ˜ë¥¼ í†µí•´ idì™€ pwê°’ì´ ì¡´ìž¬í•˜ëŠ”ì§€ ë¹„êµ
 		sprintf(login_id, id);
-		printf("·Î±×ÀÎ ¼º°ø! ¾Æ¹« Å°³ª ´©¸£¸é ¸Þ´º È­¸éÀ¸·Î ÀÌµ¿ÇÕ´Ï´Ù.");		//·Î±×ÀÎ ¼º°ø ¸Þ½ÃÁö Ãâ·Â
-		_getch();																//¾Æ¹« Å°³ª ÀÔ·Â ¹ÞÀ½
-		mysql_free_result(result);							//mysql_free_result ÇÔ¼ö¸¦ »ç¿ëÇÏ¿© ¸Þ¸ð¸®¿¡ resultÀÇ ³»¿ë Á¦°Å(ÇØÁ¦)
-		return 0;																//0(¼º°ø) ¹ÝÈ¯
+		printf("ë¡œê·¸ì¸ ì„±ê³µ! ì•„ë¬´ í‚¤ë‚˜ ëˆ„ë¥´ë©´ ë©”ë‰´ í™”ë©´ìœ¼ë¡œ ì´ë™í•©ë‹ˆë‹¤.");		//ë¡œê·¸ì¸ ì„±ê³µ ë©”ì‹œì§€ ì¶œë ¥
+		_getch();																//ì•„ë¬´ í‚¤ë‚˜ ìž…ë ¥ ë°›ìŒ
+		mysql_free_result(result);							//mysql_free_result í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ ë©”ëª¨ë¦¬ì— resultì˜ ë‚´ìš© ì œê±°(í•´ì œ)
+		return 0;																//0(ì„±ê³µ) ë°˜í™˜
 	}
 	else {
-		printf("·Î±×ÀÎ ½ÇÆÐ! ¾Æ¹« Å°³ª ´©¸£¸é ¸ÞÀÎ È­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");		//·Î±×ÀÎ ¼º°ø ¸Þ½ÃÁö Ãâ·Â
-		_getch();																//¾Æ¹« Å°³ª ÀÔ·Â ¹ÞÀ½
-		mysql_free_result(result);							//mysql_free_result ÇÔ¼ö¸¦ »ç¿ëÇÏ¿© ¸Þ¸ð¸®¿¡ resultÀÇ ³»¿ë Á¦°Å(ÇØÁ¦)
-		return 1;																//0(¼º°ø) ¹ÝÈ¯
+		printf("ë¡œê·¸ì¸ ì‹¤íŒ¨! ì•„ë¬´ í‚¤ë‚˜ ëˆ„ë¥´ë©´ ë©”ì¸ í™”ë©´ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");		//ë¡œê·¸ì¸ ì„±ê³µ ë©”ì‹œì§€ ì¶œë ¥
+		_getch();																//ì•„ë¬´ í‚¤ë‚˜ ìž…ë ¥ ë°›ìŒ
+		mysql_free_result(result);							//mysql_free_result í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ ë©”ëª¨ë¦¬ì— resultì˜ ë‚´ìš© ì œê±°(í•´ì œ)
+		return 1;																//0(ì„±ê³µ) ë°˜í™˜
 	}
 }

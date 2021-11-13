@@ -1,63 +1,63 @@
-#define _CRT_SECURE_NO_WARNINGS			//ÀüÃ³¸®±â(#) ÇÁ·Î±×·¥ ½ÇÇà¿¡ »ç¿ëµÇ´Â ¸ÅÅ©·Î¿Í Çì´õÆÄÀÏ ¼±¾ð
-#include <stdio.h>						//Ç¥ÁØÀÔÃâ·Â ÇÔ¼ö Çì´õÆÄÀÏ
+#define _CRT_SECURE_NO_WARNINGS			//ì „ì²˜ë¦¬ê¸°(#) í”„ë¡œê·¸ëž¨ ì‹¤í–‰ì— ì‚¬ìš©ë˜ëŠ” ë§¤í¬ë¡œì™€ í—¤ë”íŒŒì¼ ì„ ì–¸
+#include <stdio.h>						//í‘œì¤€ìž…ì¶œë ¥ í•¨ìˆ˜ í—¤ë”íŒŒì¼
 #include <conio.h>
 
-//»ç¿ëÀÚ ÁöÁ¤ Çì´õÆÄÀÏ
+//ì‚¬ìš©ìž ì§€ì • í—¤ë”íŒŒì¼
 #include "main.h"
 #include "console.h"
 #include "drawing.h"
 #include "text.h"
 
-//¸ÞÀÎ È­¸é(¸ÅÅ©·Î »ó¼ö WIDTH¿Í HEIGHT¸¦ ¹Þ¾Æ¿ÈÀ¸·Î½á ¸ðµç È­¸é Å©±â¸¦ ÅëÀÏ)À» Ãâ·ÂÇÏ´Â ÇÔ¼ö
+//ë©”ì¸ í™”ë©´(ë§¤í¬ë¡œ ìƒìˆ˜ WIDTHì™€ HEIGHTë¥¼ ë°›ì•„ì˜´ìœ¼ë¡œì¨ ëª¨ë“  í™”ë©´ í¬ê¸°ë¥¼ í†µì¼)ì„ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 int mainDisplay() {
-	int cnt = 0;						//¸Þ´º ¼±ÅÃ°ªÀ» ÀúÀåÇÒ intÇü º¯¼ö cnt ¼±¾ð ÈÄ 0À¸·Î ÃÊ±âÈ­(ÇÁ·Î±×·¥À» ½ÇÇà½ÃÄ×À» ¶§ ±âº»À¸·Î [·Î±×ÀÎ]ÀÌ ¼±ÅÃµÇµµ·Ï ÇÔ)
+	int cnt = 0;						//ë©”ë‰´ ì„ íƒê°’ì„ ì €ìž¥í•  intí˜• ë³€ìˆ˜ cnt ì„ ì–¸ í›„ 0ìœ¼ë¡œ ì´ˆê¸°í™”(í”„ë¡œê·¸ëž¨ì„ ì‹¤í–‰ì‹œì¼°ì„ ë•Œ ê¸°ë³¸ìœ¼ë¡œ [ë¡œê·¸ì¸]ì´ ì„ íƒë˜ë„ë¡ í•¨)
 
-	system("cls");						//system ÇÔ¼ö¸¦ ÅëÇØ È­¸é ÃÊ±âÈ­(claer)
+	system("cls");						//system í•¨ìˆ˜ë¥¼ í†µí•´ í™”ë©´ ì´ˆê¸°í™”(claer)
 
-	consoleShow();					//»ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö consoleShow ÇÔ¼ö·Î ÄÜ¼ÖÀ» ÁöÁ¤µÈ Å©±â·Î ¿®
-	drawingBorder();				//»ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö·Î Å×µÎ¸® Ãâ·Â
-	drawingTitle();					//»ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö·Î ÇÁ·Î±×·¥ Á¦¸ñ Ãâ·Â
-	drawingNameTag();				//»ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö·Î ÇÁ·Î±×·¥ ÀÛ¼ºÀÚÀÇ ÇÐ¹ø, ÀÌ¸§ Ãâ·Â
-	drawingExplanation();			//»ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö·Î Å° ¼³¸í Ãâ·Â
+	consoleShow();					//ì‚¬ìš©ìž ì§€ì • í•¨ìˆ˜ consoleShow í•¨ìˆ˜ë¡œ ì½˜ì†”ì„ ì§€ì •ëœ í¬ê¸°ë¡œ ì—¶
+	drawingBorder();				//ì‚¬ìš©ìž ì§€ì • í•¨ìˆ˜ë¡œ í…Œë‘ë¦¬ ì¶œë ¥
+	drawingTitle();					//ì‚¬ìš©ìž ì§€ì • í•¨ìˆ˜ë¡œ í”„ë¡œê·¸ëž¨ ì œëª© ì¶œë ¥
+	drawingNameTag();				//ì‚¬ìš©ìž ì§€ì • í•¨ìˆ˜ë¡œ í”„ë¡œê·¸ëž¨ ìž‘ì„±ìžì˜ í•™ë²ˆ, ì´ë¦„ ì¶œë ¥
+	drawingExplanation();			//ì‚¬ìš©ìž ì§€ì • í•¨ìˆ˜ë¡œ í‚¤ ì„¤ëª… ì¶œë ¥
 
-	gotoxy((WIDTH / 2) - 4, (HEIGHT / 2) - 4);	//gotoxy ÇÔ¼ö·Î Ãâ·ÂÇÒ [·Î±×ÀÎ] ¸Þ´º¸¦ Ãâ·ÂÇÒ À§Ä¡·Î ÀÌµ¿ÇÏ°í printf ÇÔ¼ö·Î Ãâ·Â
-	printf("·Î ±× ÀÎ");
+	gotoxy((WIDTH / 2) - 4, (HEIGHT / 2) - 4);	//gotoxy í•¨ìˆ˜ë¡œ ì¶œë ¥í•  [ë¡œê·¸ì¸] ë©”ë‰´ë¥¼ ì¶œë ¥í•  ìœ„ì¹˜ë¡œ ì´ë™í•˜ê³  printf í•¨ìˆ˜ë¡œ ì¶œë ¥
+	printf("ë¡œ ê·¸ ì¸");
 
-	gotoxy((WIDTH / 2) - 4, (HEIGHT / 2));		//gotoxy ÇÔ¼ö·Î Ãâ·ÂÇÒ [È¸¿ø°¡ÀÔ] ¸Þ´º¸¦ Ãâ·ÂÇÒ À§Ä¡·Î ÀÌµ¿ÇÏ°í printf ÇÔ¼ö·Î ÀÌµ¿
-	printf("È¸¿ø°¡ÀÔ");
+	gotoxy((WIDTH / 2) - 4, (HEIGHT / 2));		//gotoxy í•¨ìˆ˜ë¡œ ì¶œë ¥í•  [íšŒì›ê°€ìž…] ë©”ë‰´ë¥¼ ì¶œë ¥í•  ìœ„ì¹˜ë¡œ ì´ë™í•˜ê³  printf í•¨ìˆ˜ë¡œ ì´ë™
+	printf("íšŒì›ê°€ìž…");
 
-	gotoxy((WIDTH / 2) - 8, (HEIGHT / 2) - 4);	//gotoxy ÇÔ¼ö·Î [·Î±×ÀÎ] ¸Þ´ºÀÇ ¿ÞÂÊ¿¡ '¢º(È­»ìÇ¥)' ¸Þ´º¸¦ Ãâ·ÂÇÔ(±âº» ¼±ÅÃ ¸Þ´º´Â [·Î±×ÀÎ] ¸Þ´º)
-	printf("¢º");
+	gotoxy((WIDTH / 2) - 8, (HEIGHT / 2) - 4);	//gotoxy í•¨ìˆ˜ë¡œ [ë¡œê·¸ì¸] ë©”ë‰´ì˜ ì™¼ìª½ì— 'â–¶(í™”ì‚´í‘œ)' ë©”ë‰´ë¥¼ ì¶œë ¥í•¨(ê¸°ë³¸ ì„ íƒ ë©”ë‰´ëŠ” [ë¡œê·¸ì¸] ë©”ë‰´)
+	printf("â–¶");
 
-	while (1) {		//¹«ÇÑ ¹Ýº¹¹®(Å°º¸µå¸¦ ÅëÇØ ¸Þ´º¸¦ ¼±ÅÃ)
-		int key = 0;		//»ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ Å° °ªÀ» ÀúÀåÇÏ±â À§ÇÑ intÇü º¯¼ö key¸¦ ¼±¾ð ÈÄ 0À¸·Î ÃÊ±âÈ­
+	while (1) {		//ë¬´í•œ ë°˜ë³µë¬¸(í‚¤ë³´ë“œë¥¼ í†µí•´ ë©”ë‰´ë¥¼ ì„ íƒ)
+		int key = 0;		//ì‚¬ìš©ìžê°€ ìž…ë ¥í•œ í‚¤ ê°’ì„ ì €ìž¥í•˜ê¸° ìœ„í•œ intí˜• ë³€ìˆ˜ keyë¥¼ ì„ ì–¸ í›„ 0ìœ¼ë¡œ ì´ˆê¸°í™”
 
-		key = _getch();		//_getch() ÇÔ¼ö¸¦ ÅëÇØ º¯¼ö key¿¡ »ç¿ëÀÚ°¡ Å°¸¦ ÀÔ·ÂÇßÀ» ¶§ Å°¸¦ ÀúÀå
+		key = _getch();		//_getch() í•¨ìˆ˜ë¥¼ í†µí•´ ë³€ìˆ˜ keyì— ì‚¬ìš©ìžê°€ í‚¤ë¥¼ ìž…ë ¥í–ˆì„ ë•Œ í‚¤ë¥¼ ì €ìž¥
 
-		if (key == 72) {							//key °ªÀÌ 72ÀÏ °æ¿ì(¹æÇâÅ° UpÅ°)
-			gotoxy((WIDTH / 2) - 8, (HEIGHT / 2));			//gotoxy¸¦ ÅëÇØ Æ¯Á¤ ÁÂÇ¥([È¸¿ø°¡ÀÔ] ¸Þ´º À§Ä¡)·Î Ä¿¼­¸¦ ÀÌµ¿ÇÏ°í È­»ìÇ¥¸¦ Áö¿ò
+		if (key == 72) {							//key ê°’ì´ 72ì¼ ê²½ìš°(ë°©í–¥í‚¤ Upí‚¤)
+			gotoxy((WIDTH / 2) - 8, (HEIGHT / 2));			//gotoxyë¥¼ í†µí•´ íŠ¹ì • ì¢Œí‘œ([íšŒì›ê°€ìž…] ë©”ë‰´ ìœ„ì¹˜)ë¡œ ì»¤ì„œë¥¼ ì´ë™í•˜ê³  í™”ì‚´í‘œë¥¼ ì§€ì›€
 			printf("  ");
 
-			gotoxy((WIDTH / 2) - 8, (HEIGHT / 2) - 4);		//gotoxy¸¦ ÅëÇØ Æ¯Á¤ ÁÂÇ¥([·Î±×ÀÎ] ¸Þ´º À§Ä¡)·Î Ä¿¼­¸¦ ÀÌµ¿ÇÏ°í printf ÇÔ¼ö·Î È­»ìÇ¥ Ãâ·Â
-			printf("¢º");
+			gotoxy((WIDTH / 2) - 8, (HEIGHT / 2) - 4);		//gotoxyë¥¼ í†µí•´ íŠ¹ì • ì¢Œí‘œ([ë¡œê·¸ì¸] ë©”ë‰´ ìœ„ì¹˜)ë¡œ ì»¤ì„œë¥¼ ì´ë™í•˜ê³  printf í•¨ìˆ˜ë¡œ í™”ì‚´í‘œ ì¶œë ¥
+			printf("â–¶");
 
-			cnt = 0;								//º¯¼ö cnt¿¡ ¸Þ´º ¼±ÅÃ°ª(0¹øÂ°) ÀúÀå
+			cnt = 0;								//ë³€ìˆ˜ cntì— ë©”ë‰´ ì„ íƒê°’(0ë²ˆì§¸) ì €ìž¥
 		}
-		else if (key == 80) {						//key °ªÀÌ 80ÀÏ °æ¿ì(¹æÇâÅ° DownÅ°)
-			gotoxy((WIDTH / 2) - 8, (HEIGHT / 2) - 4);		//gotoxy¸¦ ÅëÇØ Æ¯Á¤ ÁÂÇ¥([·Î±×ÀÎ] ¸Þ´º À§Ä¡)·Î Ä¿¼­¸¦ ÀÌµ¿ÇÏ°í È­»ìÇ¥¸¦ Áö¿ò
+		else if (key == 80) {						//key ê°’ì´ 80ì¼ ê²½ìš°(ë°©í–¥í‚¤ Downí‚¤)
+			gotoxy((WIDTH / 2) - 8, (HEIGHT / 2) - 4);		//gotoxyë¥¼ í†µí•´ íŠ¹ì • ì¢Œí‘œ([ë¡œê·¸ì¸] ë©”ë‰´ ìœ„ì¹˜)ë¡œ ì»¤ì„œë¥¼ ì´ë™í•˜ê³  í™”ì‚´í‘œë¥¼ ì§€ì›€
 			printf("  ");
 
-			gotoxy((WIDTH / 2) - 8, (HEIGHT / 2));			//gotoxy¸¦ ÅëÇØ Æ¯Á¤ ÁÂÇ¥([È¸¿ø°¡ÀÔ] ¸Þ´º À§Ä¡)·Î Ä¿¼­¸¦ ÀÌµ¿ÇÏ°í printf ÇÔ¼ö·Î È­»ìÇ¥ Ãâ·Â
-			printf("¢º");
+			gotoxy((WIDTH / 2) - 8, (HEIGHT / 2));			//gotoxyë¥¼ í†µí•´ íŠ¹ì • ì¢Œí‘œ([íšŒì›ê°€ìž…] ë©”ë‰´ ìœ„ì¹˜)ë¡œ ì»¤ì„œë¥¼ ì´ë™í•˜ê³  printf í•¨ìˆ˜ë¡œ í™”ì‚´í‘œ ì¶œë ¥
+			printf("â–¶");
 
-			cnt = 1;								//º¯¼ö cnt¿¡ ¸Þ´º ¼±ÅÃ°ª(1¹øÂ°) ÀúÀå
+			cnt = 1;								//ë³€ìˆ˜ cntì— ë©”ë‰´ ì„ íƒê°’(1ë²ˆì§¸) ì €ìž¥
 		}
-		else if (key == 13) {						//key °ªÀÌ 13ÀÏ °æ¿ì(Enter Å°)
-			return cnt;									//¼±ÅÃÇÑ ¸Þ´º °ªÀ» ¹ÝÈ¯
+		else if (key == 13) {						//key ê°’ì´ 13ì¼ ê²½ìš°(Enter í‚¤)
+			return cnt;									//ì„ íƒí•œ ë©”ë‰´ ê°’ì„ ë°˜í™˜
 		}
-		else if (key == 27) {					//key °ªÀÌ 27ÀÏ °æ¿ì(Esc Å°)
+		else if (key == 27) {					//key ê°’ì´ 27ì¼ ê²½ìš°(Esc í‚¤)
 			mysql_close(connection);
-			exit(0);									//exit ÇÔ¼ö¸¦ ÅëÇØ ÇÁ·Î±×·¥ Á¾·á
+			exit(0);									//exit í•¨ìˆ˜ë¥¼ í†µí•´ í”„ë¡œê·¸ëž¨ ì¢…ë£Œ
 		}
 	}
 }

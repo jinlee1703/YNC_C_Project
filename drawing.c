@@ -1,55 +1,55 @@
-#include <stdio.h>			//Ç¥ÁØÀÔÃâ·Â ÇÔ¼ö Çì´õÆÄÀÏ
-#include <Windows.h>		//À©µµ¿ì ÀÀ¿ë ÇÁ·Î±×·¥À» À§ÇÑ Çì´õÆÄÀÏ
+#include <stdio.h>			//í‘œì¤€ìž…ì¶œë ¥ í•¨ìˆ˜ í—¤ë”íŒŒì¼
+#include <Windows.h>		//ìœˆë„ìš° ì‘ìš© í”„ë¡œê·¸ëž¨ì„ ìœ„í•œ í—¤ë”íŒŒì¼
 
 #include "main.h"
-#include "console.h"		//console.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
+#include "console.h"		//console.h ì‚¬ìš©ìž í—¤ë”íŒŒì¼ í¬í•¨
 
-//È­¸é Å×µÎ¸®¸¦ ±×·ÁÁÖ´Â ÇÔ¼ö
+//í™”ë©´ í…Œë‘ë¦¬ë¥¼ ê·¸ë ¤ì£¼ëŠ” í•¨ìˆ˜
 void drawingBorder() {
-	int i = 0, j = 0;		//for ¹Ýº¹¹®¿¡ »ç¿ëµÉ intÇü º¯¼ö i¿Í j ¼±¾ð ÈÄ 0À¸·Î ÃÊ±âÈ­
+	int i = 0, j = 0;		//for ë°˜ë³µë¬¸ì— ì‚¬ìš©ë  intí˜• ë³€ìˆ˜ iì™€ j ì„ ì–¸ í›„ 0ìœ¼ë¡œ ì´ˆê¸°í™”
 
-	for (i = 0; i < HEIGHT; i++) {				//Å×µÎ¸® ±×¸®±â
+	for (i = 0; i < HEIGHT; i++) {				//í…Œë‘ë¦¬ ê·¸ë¦¬ê¸°
 		for (j = 0; j < WIDTH; j += 2) {
 			gotoxy(j, i);
-			if (i == 0 || i == HEIGHT - 1) {			//°¡·ÎÁÙ
-				printf("¡á");
+			if (i == 0 || i == HEIGHT - 1) {			//ê°€ë¡œì¤„
+				printf("â– ");
 			}
-			else if (j == 0 || j == WIDTH - 2)		//¼¼·ÎÁÙ
-				printf("¡á");
+			else if (j == 0 || j == WIDTH - 2)		//ì„¸ë¡œì¤„
+				printf("â– ");
 		}
 	}
 }
 
-//È­¸é Áß¾Ó »ó´Ü¿¡ °ÔÀÓ Á¦¸ñ(Title)À» Ãâ·ÂÇÏ´Â ÇÔ¼ö
+//í™”ë©´ ì¤‘ì•™ ìƒë‹¨ì— ê²Œìž„ ì œëª©(Title)ì„ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 void drawingTitle() {
-	//Á¦¸ñ Ãâ·Â : 28ºñÆ®
+	//ì œëª© ì¶œë ¥ : 28ë¹„íŠ¸
 	gotoxy((WIDTH / 2) - 14, 4);
 	printf("+--------------------------+");
 	gotoxy((WIDTH / 2) - 14, 5);
-	printf("| Å¸ ÀÚ ¿¬ ½À  ÇÁ ·Î ±× ·¥ |");
+	printf("| íƒ€ ìž ì—° ìŠµ  í”„ ë¡œ ê·¸ ëž¨ |");
 	gotoxy((WIDTH / 2) - 14, 6);
 	printf("+--------------------------+");
 }
 
-//È­¸é ÁÂÃø »ó´Ü¿¡ ÇÐ¹ø, ÀÌ¸§À» Ãâ·ÂÇÏ´Â ÇÔ¼ö
+//í™”ë©´ ì¢Œì¸¡ ìƒë‹¨ì— í•™ë²ˆ, ì´ë¦„ì„ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 void drawingNameTag() {
 	gotoxy(2, 1);
-	printf(" ÇÐ¹ø : 1705026");
+	printf(" í•™ë²ˆ : 1705026");
 	gotoxy(2, 2);
-	printf(" ÀÌ¸§ : ÀÌÁø¿ì");
+	printf(" ì´ë¦„ : ì´ì§„ìš°");
 }
 
-//È­¸é Áß¾Ó ÇÏ´Ü¿¡ Å° Á¶ÀÛ ¼³¸íÀ» Ãâ·ÂÇÏ´Â ÇÔ¼ö
+//í™”ë©´ ì¤‘ì•™ í•˜ë‹¨ì— í‚¤ ì¡°ìž‘ ì„¤ëª…ì„ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 void drawingExplanation() {
 	gotoxy((WIDTH / 2) - 11, 25);
-	printf("¸Þ´º Á¶ÀÛ : '¡è¡é' KEY \n");
+	printf("ë©”ë‰´ ì¡°ìž‘ : 'â†‘â†“' KEY \n");
 	gotoxy((WIDTH / 2) - 12, 28);
-	printf("¼±ÅÃ ¿Ï·á : 'ENTER' KEY \n");
+	printf("ì„ íƒ ì™„ë£Œ : 'ENTER' KEY \n");
 	gotoxy((WIDTH / 2) - 11, 31);
-	printf("ÀÌÀü ¸Þ´º : 'ESC' KEY \n");
+	printf("ì´ì „ ë©”ë‰´ : 'ESC' KEY \n");
 }
 
-//ÅØ½ºÆ®¹Ú½º ÇüÅÂ¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+//í…ìŠ¤íŠ¸ë°•ìŠ¤ í˜•íƒœë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 void drawingTextBox(int col, char text[]) {
 	int stl = (int)strlen(text) + 1;
 
@@ -63,17 +63,17 @@ void drawingTextBox(int col, char text[]) {
 	printf("|");
 }
 
-//·Î±×ÀÎ ÈÄ È­¸é¿¡¼­ ·Î±×ÀÎ µÈ ¾ÆÀÌµð¸¦ È­¸é ¿ìÃø »ó´Ü¿¡ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+//ë¡œê·¸ì¸ í›„ í™”ë©´ì—ì„œ ë¡œê·¸ì¸ ëœ ì•„ì´ë””ë¥¼ í™”ë©´ ìš°ì¸¡ ìƒë‹¨ì— ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 void drawingIdtag() {
 	gotoxy(WIDTH - 30, 2);
-	printf("Player :  %s ´Ô", login_id);
+	printf("Player :  %s ë‹˜", login_id);
 }
 
-//gotoxy¿Í printf ÇÔ¼ö¿Í for¹®À» »ç¿ëÇÏ¿© ÅØ½ºÆ®¹Ú½º¸¦ Ãâ·ÂÇÏ´Â »ç¿ëÀÚ ÇÔ¼ö(±ä±Û¿¬½À, ÂªÀº ±Û ¿¬½À »ç¿ë)
+//gotoxyì™€ printf í•¨ìˆ˜ì™€ forë¬¸ì„ ì‚¬ìš©í•˜ì—¬ í…ìŠ¤íŠ¸ë°•ìŠ¤ë¥¼ ì¶œë ¥í•˜ëŠ” ì‚¬ìš©ìž í•¨ìˆ˜(ê¸´ê¸€ì—°ìŠµ, ì§§ì€ ê¸€ ì—°ìŠµ ì‚¬ìš©)
 void drawingTestTextbox(int col) {
-	int i = 0;								//for¹Ýº¹¹®À» »ç¿ëÇÏ±â À§ÇÑ intÇü º¯¼ö i ¼±¾ð ÈÄ 0À¸·Î ÃÊ±âÈ­
+	int i = 0;								//forë°˜ë³µë¬¸ì„ ì‚¬ìš©í•˜ê¸° ìœ„í•œ intí˜• ë³€ìˆ˜ i ì„ ì–¸ í›„ 0ìœ¼ë¡œ ì´ˆê¸°í™”
 
-	gotoxy(4, col - 1);		printf("+");	//È­¸é¿¡ ÅØ½ºÆ® ¹Ú½º Ãâ·Â
+	gotoxy(4, col - 1);		printf("+");	//í™”ë©´ì— í…ìŠ¤íŠ¸ ë°•ìŠ¤ ì¶œë ¥
 	gotoxy(4, col + 1);		printf("+");
 	for (i = 5; i < WIDTH - 5; i++) {
 		gotoxy(i, col - 1);	printf("-");
@@ -85,7 +85,7 @@ void drawingTestTextbox(int col) {
 	gotoxy(WIDTH - 5, col);		printf("|");
 }
 
-//gotoxy¿Í printf ÇÔ¼ö¿Í for¹®À» »ç¿ëÇÏ¿© Ãâ·ÂµÈ ÅØ½ºÆ®¹Ú½ºÀÇ ³»¿ë(È­¸é »ó)À» Áö¿ì´Â »ç¿ëÀÚ ÇÔ¼ö(±ä±Û¿¬½À, ÂªÀº ±Û ¿¬½À »ç¿ë)
+//gotoxyì™€ printf í•¨ìˆ˜ì™€ forë¬¸ì„ ì‚¬ìš©í•˜ì—¬ ì¶œë ¥ëœ í…ìŠ¤íŠ¸ë°•ìŠ¤ì˜ ë‚´ìš©(í™”ë©´ ìƒ)ì„ ì§€ìš°ëŠ” ì‚¬ìš©ìž í•¨ìˆ˜(ê¸´ê¸€ì—°ìŠµ, ì§§ì€ ê¸€ ì—°ìŠµ ì‚¬ìš©)
 void testTextboxClear(int col) {
 	int i = 0;
 

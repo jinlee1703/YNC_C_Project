@@ -1,4 +1,4 @@
-//console.c¿¡ ÀÖ´Â ÇÔ¼öµéÀ» ¼±¾ğÇÑ Çì´õÆÄÀÏ
+//console.cì— ìˆëŠ” í•¨ìˆ˜ë“¤ì„ ì„ ì–¸í•œ í—¤ë”íŒŒì¼
 #include <Windows.h>
 #include "main.h"
 

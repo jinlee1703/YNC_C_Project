@@ -1,95 +1,95 @@
-#define _CRT_SECURE_NO_WARNINGS		//ÀüÃ³¸®±â(#) ÇÁ·Î±×·¥ ½ÇÇà¿¡ »ç¿ëµÇ´Â ¸ÅÅ©·Î¿Í Çì´õÆÄÀÏ ¼±¾ð
-#include <stdio.h>					//Ç¥ÁØÀÔÃâ·Â ÇÔ¼ö Çì´õÆÄÀÏ
-#include <conio.h>					//ÄÜ¼Ö ÀÔÃâ·Â Çì´õÆÄÀÏ
-#include <string.h>					//Ç¥ÁØ ¹®ÀÚ¿­ ÇÔ¼ö Çì´õÆÄÀÏ
-#include <stdlib.h>					//Ç¥ÁØ ¶óÀÌºê·¯¸® Çì´õÆÄÀÏ
-#include <windows.h>				//À©µµ¿ì ÀÀ¿ë ÇÁ·Î±×·¥À» À§ÇÑ Çì´õÆÄÀÏ
+#define _CRT_SECURE_NO_WARNINGS		//ì „ì²˜ë¦¬ê¸°(#) í”„ë¡œê·¸ëž¨ ì‹¤í–‰ì— ì‚¬ìš©ë˜ëŠ” ë§¤í¬ë¡œì™€ í—¤ë”íŒŒì¼ ì„ ì–¸
+#include <stdio.h>					//í‘œì¤€ìž…ì¶œë ¥ í•¨ìˆ˜ í—¤ë”íŒŒì¼
+#include <conio.h>					//ì½˜ì†” ìž…ì¶œë ¥ í—¤ë”íŒŒì¼
+#include <string.h>					//í‘œì¤€ ë¬¸ìžì—´ í•¨ìˆ˜ í—¤ë”íŒŒì¼
+#include <stdlib.h>					//í‘œì¤€ ë¼ì´ë¸ŒëŸ¬ë¦¬ í—¤ë”íŒŒì¼
+#include <windows.h>				//ìœˆë„ìš° ì‘ìš© í”„ë¡œê·¸ëž¨ì„ ìœ„í•œ í—¤ë”íŒŒì¼
 
-#include "console.h"		//console.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
-#include "drawing.h"		//drawing.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
-#include "text.h"			//text.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
+#include "console.h"		//console.h ì‚¬ìš©ìž í—¤ë”íŒŒì¼ í¬í•¨
+#include "drawing.h"		//drawing.h ì‚¬ìš©ìž í—¤ë”íŒŒì¼ í¬í•¨
+#include "text.h"			//text.h ì‚¬ìš©ìž í—¤ë”íŒŒì¼ í¬í•¨
 
-void viewChart(int cnt);		//¸Þ´º ¼±ÅÃ½Ã Â÷Æ®°¡ Ãâ·ÂµÇµµ·Ï ÇÏ´Â »ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö(¹Ì±¸Çö)
-void viewSelect(int cnt);		//Å° ÀÔ·Â ½Ã ¸Þ´º¸¦ ¼±ÅÃÇÏµµ·Ï ÇÏ´Â ÇÔ¼ö
+void viewChart(int cnt);		//ë©”ë‰´ ì„ íƒì‹œ ì°¨íŠ¸ê°€ ì¶œë ¥ë˜ë„ë¡ í•˜ëŠ” ì‚¬ìš©ìž ì§€ì • í•¨ìˆ˜(ë¯¸êµ¬í˜„)
+void viewSelect(int cnt);		//í‚¤ ìž…ë ¥ ì‹œ ë©”ë‰´ë¥¼ ì„ íƒí•˜ë„ë¡ í•˜ëŠ” í•¨ìˆ˜
 
-//[·©Å· º¸±â] ¸Þ´º ¼±ÅÃ ½Ã È­¸éÀÌ ³ªÅ¸³ªµµ·Ï ÇÏ´Â ÇÔ¼ö
+//[ëž­í‚¹ ë³´ê¸°] ë©”ë‰´ ì„ íƒ ì‹œ í™”ë©´ì´ ë‚˜íƒ€ë‚˜ë„ë¡ í•˜ëŠ” í•¨ìˆ˜
 void viewRanking() {
-	int cnt = 0, key = 0;			//¸î ¹øÂ° Ä«Å×°í¸®(·©Å· ºÐ·ù)¸¦ ¼±ÅÃÇß´ÂÁö¸¦ ÀúÀåÇÒ intÇü º¯¼ö cnt¿Í »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ Å° °ªÀ» ÀúÀåÇÒ º¯¼ö key ¼±¾ð ÈÄ 0À¸·Î ÃÊ±âÈ­
+	int cnt = 0, key = 0;			//ëª‡ ë²ˆì§¸ ì¹´í…Œê³ ë¦¬(ëž­í‚¹ ë¶„ë¥˜)ë¥¼ ì„ íƒí–ˆëŠ”ì§€ë¥¼ ì €ìž¥í•  intí˜• ë³€ìˆ˜ cntì™€ ì‚¬ìš©ìžê°€ ìž…ë ¥í•œ í‚¤ ê°’ì„ ì €ìž¥í•  ë³€ìˆ˜ key ì„ ì–¸ í›„ 0ìœ¼ë¡œ ì´ˆê¸°í™”
 
-	system("cls");					//systemÇÔ¼ö·Î È­¸é ÃÊ±âÈ­
+	system("cls");					//systemí•¨ìˆ˜ë¡œ í™”ë©´ ì´ˆê¸°í™”
 
-	consoleShow();				//»ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö consoleShow ÇÔ¼ö·Î ÄÜ¼ÖÀ» ÁöÁ¤µÈ Å©±â·Î ¿®
-	drawingBorder();			//»ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö·Î Å×µÎ¸® Ãâ·Â
-	drawingIdtag();	//·Î±×ÀÎ ÇÑ ID Ãâ·Â(¹Ì¿Ï¼º)
+	consoleShow();				//ì‚¬ìš©ìž ì§€ì • í•¨ìˆ˜ consoleShow í•¨ìˆ˜ë¡œ ì½˜ì†”ì„ ì§€ì •ëœ í¬ê¸°ë¡œ ì—¶
+	drawingBorder();			//ì‚¬ìš©ìž ì§€ì • í•¨ìˆ˜ë¡œ í…Œë‘ë¦¬ ì¶œë ¥
+	drawingIdtag();	//ë¡œê·¸ì¸ í•œ ID ì¶œë ¥(ë¯¸ì™„ì„±)
 
-	gotoxy(20, 5);					//gotoxy ÇÔ¼ö·Î Ãâ·ÂÇÒ [ÂªÀº ±Û Á¡¼ö] Ä«Å×°í¸®¸¦ Ãâ·ÂÇÒ À§Ä¡·Î ÀÌµ¿ÇÏ°í printf ÇÔ¼ö·Î Ãâ·Â
-	printf("ÂªÀº ±Û Á¡¼ö");
+	gotoxy(20, 5);					//gotoxy í•¨ìˆ˜ë¡œ ì¶œë ¥í•  [ì§§ì€ ê¸€ ì ìˆ˜] ì¹´í…Œê³ ë¦¬ë¥¼ ì¶œë ¥í•  ìœ„ì¹˜ë¡œ ì´ë™í•˜ê³  printf í•¨ìˆ˜ë¡œ ì¶œë ¥
+	printf("ì§§ì€ ê¸€ ì ìˆ˜");
 
-	gotoxy(55, 5);					//gotoxy ÇÔ¼ö·Î Ãâ·ÂÇÒ [±ä ±Û Á¡¼ö] Ä«Å×°í¸®¸¦ Ãâ·ÂÇÒ À§Ä¡·Î ÀÌµ¿ÇÏ°í printf ÇÔ¼ö·Î Ãâ·Â
-	printf("±ä ±Û Á¡¼ö");
+	gotoxy(55, 5);					//gotoxy í•¨ìˆ˜ë¡œ ì¶œë ¥í•  [ê¸´ ê¸€ ì ìˆ˜] ì¹´í…Œê³ ë¦¬ë¥¼ ì¶œë ¥í•  ìœ„ì¹˜ë¡œ ì´ë™í•˜ê³  printf í•¨ìˆ˜ë¡œ ì¶œë ¥
+	printf("ê¸´ ê¸€ ì ìˆ˜");
 
-	gotoxy(90, 5);					//gotoxy ÇÔ¼ö·Î Ãâ·ÂÇÒ [»ê¼ººñ °ÔÀÓ] Ä«Å×°í¸®¸¦ Ãâ·ÂÇÒ À§Ä¡·Î ÀÌµ¿ÇÏ°í printf ÇÔ¼ö·Î Ãâ·Â
-	printf("»ê¼ººñ °ÔÀÓ Á¡¼ö");
+	gotoxy(90, 5);					//gotoxy í•¨ìˆ˜ë¡œ ì¶œë ¥í•  [ì‚°ì„±ë¹„ ê²Œìž„] ì¹´í…Œê³ ë¦¬ë¥¼ ì¶œë ¥í•  ìœ„ì¹˜ë¡œ ì´ë™í•˜ê³  printf í•¨ìˆ˜ë¡œ ì¶œë ¥
+	printf("ì‚°ì„±ë¹„ ê²Œìž„ ì ìˆ˜");
 
-	gotoxy(16, 5);					//gotoxy ÇÔ¼ö¸¦ ÅëÇØ »ç¿ëÀÚ°¡ ¼±ÅÃÇÑ ¸Þ´ºÀÇ ¿ÞÂÊÀÇ À§Ä¡·Î ÀÌµ¿ÇÏ¿© È­»ìÇ¥(¢º) Ãâ·Â
-	printf("¢º");
-	viewChart(cnt);			//¼±ÅÃÇÑ Ä«Å×°í¸®¿¡ ÇØ´çÇÏ´Â Â÷Æ® Ãâ·Â
+	gotoxy(16, 5);					//gotoxy í•¨ìˆ˜ë¥¼ í†µí•´ ì‚¬ìš©ìžê°€ ì„ íƒí•œ ë©”ë‰´ì˜ ì™¼ìª½ì˜ ìœ„ì¹˜ë¡œ ì´ë™í•˜ì—¬ í™”ì‚´í‘œ(â–¶) ì¶œë ¥
+	printf("â–¶");
+	viewChart(cnt);			//ì„ íƒí•œ ì¹´í…Œê³ ë¦¬ì— í•´ë‹¹í•˜ëŠ” ì°¨íŠ¸ ì¶œë ¥
 
-	//sprintf ÇÔ¼ö¸¦ ÅëÇØ query¿¡ Äõ¸®¹®À» ÀúÀå
+	//sprintf í•¨ìˆ˜ë¥¼ í†µí•´ queryì— ì¿¼ë¦¬ë¬¸ì„ ì €ìž¥
 	sprintf(query, "select member_id, events_id, format(avg(typing_speed),0), format(avg(typing_percent),0), date_format(typing_date, '%%m-%%d') from typing where member_id = '%s' and events_id != '3'", login_id);
 
-	mysql_query(connection, query);		//mysql_query ÇÔ¼ö¸¦ ÅëÇØ connection(¿¬°á Á¤º¸)¿¡ Äõ¸®¹® ½ÇÇà(DB¿¡ ÀúÀåµÇ¾î ÀÖ´Â ÀÖ´Â ÀüÃ¼ Å¸ÀÌÇÎ µ¥ÀÌÅÍÀÇ Æò±ÕÀ» Á¶È¸)
+	mysql_query(connection, query);		//mysql_query í•¨ìˆ˜ë¥¼ í†µí•´ connection(ì—°ê²° ì •ë³´)ì— ì¿¼ë¦¬ë¬¸ ì‹¤í–‰(DBì— ì €ìž¥ë˜ì–´ ìžˆëŠ” ìžˆëŠ” ì „ì²´ íƒ€ì´í•‘ ë°ì´í„°ì˜ í‰ê· ì„ ì¡°íšŒ)
 
-	result = mysql_store_result(connection);			//result¿¡ mysql_store_resultÇÔ¼ö¸¦ »ç¿ëÇÏ¿© connection(¿¬°áÁ¤º¸)ÀÇ ½ÇÇà °á°ú¸¦ ÀúÀå
+	result = mysql_store_result(connection);			//resultì— mysql_store_resultí•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ connection(ì—°ê²°ì •ë³´)ì˜ ì‹¤í–‰ ê²°ê³¼ë¥¼ ì €ìž¥
 
 	row = mysql_fetch_row(result);
 
 	gotoxy(6, 2);
-	printf("Æò±Õ Å¸¼ö : %sÅ¸ \t Æò±Õ Á¤È®µµ : %s%%", row[2], row[3]);
+	printf("í‰ê·  íƒ€ìˆ˜ : %síƒ€ \t í‰ê·  ì •í™•ë„ : %s%%", row[2], row[3]);
 
-	while (1) {						//¹«ÇÑ ¹Ýº¹¹®(esc Å°¸¦ ÀÔ·ÂÇÏ¸é ¸Þ´º ¼±ÅÃ È­¸éÀ¸·Î µ¹¾Æ°¨)
-		key = _getch();					//º¯¼ö key¿¡ »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ key °ªÀ» ÀúÀå
-		if (key == 72) {				//key °ªÀÌ 72ÀÏ °æ¿ì(¹æÇâÅ° UpÅ°)
-			if (cnt > 0) {					//cnt°¡ 0 º¸´Ù Å¬ °æ¿ì(¸Ç À§ÀÇ ¸Þ´º°¡ ¾Æ´Ñ ¸Þ´º ¼±ÅÃ)
-				cnt--;						//cntÀÇ °ªÀ» 1»©°í
-				viewSelect(cnt);		//¼±ÅÃµÈ Ä«Å×°í¸®¸¦ Ç¥½ÃÇÏµµ·Ï ÇÔ¼ö È£Ãâ
-				viewChart(cnt);		//¼±ÅÃµÈ Ä«Å×°í¸®¿¡ ÇØ´çÇÏ´Â Â÷Æ®¸¦ Ãâ·ÂÇÏµµ·Ï ÇÔ¼ö È£Ãâ
+	while (1) {						//ë¬´í•œ ë°˜ë³µë¬¸(esc í‚¤ë¥¼ ìž…ë ¥í•˜ë©´ ë©”ë‰´ ì„ íƒ í™”ë©´ìœ¼ë¡œ ëŒì•„ê°)
+		key = _getch();					//ë³€ìˆ˜ keyì— ì‚¬ìš©ìžê°€ ìž…ë ¥í•œ key ê°’ì„ ì €ìž¥
+		if (key == 72) {				//key ê°’ì´ 72ì¼ ê²½ìš°(ë°©í–¥í‚¤ Upí‚¤)
+			if (cnt > 0) {					//cntê°€ 0 ë³´ë‹¤ í´ ê²½ìš°(ë§¨ ìœ„ì˜ ë©”ë‰´ê°€ ì•„ë‹Œ ë©”ë‰´ ì„ íƒ)
+				cnt--;						//cntì˜ ê°’ì„ 1ë¹¼ê³ 
+				viewSelect(cnt);		//ì„ íƒëœ ì¹´í…Œê³ ë¦¬ë¥¼ í‘œì‹œí•˜ë„ë¡ í•¨ìˆ˜ í˜¸ì¶œ
+				viewChart(cnt);		//ì„ íƒëœ ì¹´í…Œê³ ë¦¬ì— í•´ë‹¹í•˜ëŠ” ì°¨íŠ¸ë¥¼ ì¶œë ¥í•˜ë„ë¡ í•¨ìˆ˜ í˜¸ì¶œ
 			}
 		}
-		else if (key == 80) {			//key °ªÀÌ 80ÀÏ °æ¿ì(¹æÇâÅ° DownÅ°)
-			if (cnt < 2) {					//cnt°¡ 2 º¸´Ù ÀÛÀ» °æ¿ì(¸Ç ¾Æ·¡ÀÇ ¸Þ´º°¡ ¾Æ´Ñ ¸Þ´º ¼±ÅÃ)
-				cnt++;						//cntÀÇ °ªÀ» ´õÇÏ°í
-				viewSelect(cnt);		//¼±ÅÃµÈ Ä«Å×°í¸®¸¦ Ç¥½ÃÇÏµµ·Ï ÇÔ¼ö È£Ãâ
-				viewChart(cnt);		//¼±ÅÃµÈ Ä«Å×°í¸®¿¡ ÇØ´çÇÏ´Â Â÷Æ®¸¦ Ãâ·ÂÇÏµµ·Ï ÇÔ¼ö È£Ãâ
+		else if (key == 80) {			//key ê°’ì´ 80ì¼ ê²½ìš°(ë°©í–¥í‚¤ Downí‚¤)
+			if (cnt < 2) {					//cntê°€ 2 ë³´ë‹¤ ìž‘ì„ ê²½ìš°(ë§¨ ì•„ëž˜ì˜ ë©”ë‰´ê°€ ì•„ë‹Œ ë©”ë‰´ ì„ íƒ)
+				cnt++;						//cntì˜ ê°’ì„ ë”í•˜ê³ 
+				viewSelect(cnt);		//ì„ íƒëœ ì¹´í…Œê³ ë¦¬ë¥¼ í‘œì‹œí•˜ë„ë¡ í•¨ìˆ˜ í˜¸ì¶œ
+				viewChart(cnt);		//ì„ íƒëœ ì¹´í…Œê³ ë¦¬ì— í•´ë‹¹í•˜ëŠ” ì°¨íŠ¸ë¥¼ ì¶œë ¥í•˜ë„ë¡ í•¨ìˆ˜ í˜¸ì¶œ
 			}
 		}
-		else if (key == 27) {			//Esc key ÀÔ·Â ½Ã 4 ¹ÝÈ¯ (¸ÞÀÎ È­¸éÀ¸·Î È¸±Í)
+		else if (key == 27) {			//Esc key ìž…ë ¥ ì‹œ 4 ë°˜í™˜ (ë©”ì¸ í™”ë©´ìœ¼ë¡œ íšŒê·€)
 			break;
 		}
 	}
 }
 
-//Å° ÀÔ·Â ½Ã ¸Þ´º¸¦ ¼±ÅÃÇÏµµ·Ï ÇÏ´Â ÇÔ¼ö
+//í‚¤ ìž…ë ¥ ì‹œ ë©”ë‰´ë¥¼ ì„ íƒí•˜ë„ë¡ í•˜ëŠ” í•¨ìˆ˜
 void viewSelect(int cnt) {
-	int i = 0;							//for ¹Ýº¹¹®À» »ç¿ëÇÏ±â À§ÇÑ intÇü º¯¼ö i ¼±¾ð ÈÄ 0À¸·Î ÃÊ±âÈ­
+	int i = 0;							//for ë°˜ë³µë¬¸ì„ ì‚¬ìš©í•˜ê¸° ìœ„í•œ intí˜• ë³€ìˆ˜ i ì„ ì–¸ í›„ 0ìœ¼ë¡œ ì´ˆê¸°í™”
 
-	for (i = 0; i < 4; i++) {			//for ¹Ýº¹¹®°ú gotoxy ÇÔ¼ö¸¦ ÅëÇØ 4°³ÀÇ ¸Þ´º¿¡ ÀÖ´Â È­»ìÇ¥ Ç¥½Ã(¢º)¸¦ Áö¿î´Ù.(printf() ÇÔ¼ö·Î µ¤¾î¾²±â)
+	for (i = 0; i < 4; i++) {			//for ë°˜ë³µë¬¸ê³¼ gotoxy í•¨ìˆ˜ë¥¼ í†µí•´ 4ê°œì˜ ë©”ë‰´ì— ìžˆëŠ” í™”ì‚´í‘œ í‘œì‹œ(â–¶)ë¥¼ ì§€ìš´ë‹¤.(printf() í•¨ìˆ˜ë¡œ ë®ì–´ì“°ê¸°)
 		gotoxy(16 + (i * 35), 5);
 		printf("  ");
 	}
 
-	gotoxy(16 + (cnt * 35), 5);			//gotoxy ÇÔ¼ö¸¦ ÅëÇØ »ç¿ëÀÚ°¡ ¼±ÅÃÇÑ ¸Þ´ºÀÇ ¿ÞÂÊÀÇ À§Ä¡·Î ÀÌµ¿ÇÏ¿© È­»ìÇ¥(¢º) Ãâ·Â
-	printf("¢º");
+	gotoxy(16 + (cnt * 35), 5);			//gotoxy í•¨ìˆ˜ë¥¼ í†µí•´ ì‚¬ìš©ìžê°€ ì„ íƒí•œ ë©”ë‰´ì˜ ì™¼ìª½ì˜ ìœ„ì¹˜ë¡œ ì´ë™í•˜ì—¬ í™”ì‚´í‘œ(â–¶) ì¶œë ¥
+	printf("â–¶");
 }
 
 void viewChart(int cnt) {
-	int i = 0, j = 0;							//for ¹Ýº¹¹®¿¡ »ç¿ëµÇ±â À§ÇÑ int Çü º¯¼ö i¿Í j ¼±¾ð ÈÄ 0À¸·Î ÃÊ±âÈ­
+	int i = 0, j = 0;							//for ë°˜ë³µë¬¸ì— ì‚¬ìš©ë˜ê¸° ìœ„í•œ int í˜• ë³€ìˆ˜ iì™€ j ì„ ì–¸ í›„ 0ìœ¼ë¡œ ì´ˆê¸°í™”
 	int grp = 0, total_speed = 0, total_percent = 0;
 	unsigned long dw;
 	COORD spot = { 7, 8 };
 	int r = 0;
 
-	//Å×µÎ¸® ±×¸®±â
+	//í…Œë‘ë¦¬ ê·¸ë¦¬ê¸°
 	for (i = 7; i < HEIGHT - 2; i++) {				
 		for (j = 6; j < WIDTH - 6; j++) {
 			gotoxy(j, i);
@@ -97,26 +97,26 @@ void viewChart(int cnt) {
 				if (j == 6 || j == WIDTH - 7)
 					printf("+");
 				else
-					printf("-");				//°¡·ÎÁÙ
+					printf("-");				//ê°€ë¡œì¤„
 			}
 			else if (j == 6 || j == WIDTH - 7)
-				printf("|");					//¼¼·ÎÁÙ
+				printf("|");					//ì„¸ë¡œì¤„
 		}
 	}
 
-	//Â÷Æ® ¿µ¿ª ÃÊ±âÈ­
+	//ì°¨íŠ¸ ì˜ì—­ ì´ˆê¸°í™”
 	for (i = 8; i < HEIGHT - 3; i++) {
 		spot.Y = i;
 		FillConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), ' ', WIDTH - 14, spot, &dw);
 	}
 
-	//[Â÷Æ® Ç¥Çö]
-	sprintf(query, "(select member_id, events_id, format(avg(typing_speed),0), format(avg(typing_percent),0), date_format(typing_date, '%%m-%%d') from typing where member_id = '%s' and events_id = '%d' group by typing_date order by 5 desc limit 10) order by 5", login_id, cnt + 1);		//sprintf ÇÔ¼ö¸¦ ÅëÇØ query¿¡ Äõ¸®¹®À» ÀúÀå
+	//[ì°¨íŠ¸ í‘œí˜„]
+	sprintf(query, "(select member_id, events_id, format(avg(typing_speed),0), format(avg(typing_percent),0), date_format(typing_date, '%%m-%%d') from typing where member_id = '%s' and events_id = '%d' group by typing_date order by 5 desc limit 10) order by 5", login_id, cnt + 1);		//sprintf í•¨ìˆ˜ë¥¼ í†µí•´ queryì— ì¿¼ë¦¬ë¬¸ì„ ì €ìž¥
 
-	mysql_query(connection, query);		//mysql_query ÇÔ¼ö¸¦ ÅëÇØ connection(¿¬°á Á¤º¸)¿¡ Äõ¸®¹® ½ÇÇà(DB¿¡ ÀúÀåµÇ¾î ÀÖ´Â ¼±ÅÃÇÑ ¸ðµå¿¡ ÇØ´çÇÏ´Â Å¸ÀÌÇÎ µ¥ÀÌÅÍ¸¦ ³¯Â¥º°·Î ±×·ìÈ­ÇÏ¿© Á¶È¸)
-										//¸Õ ³¯Â¥ ¼øÀ¸·Î µ¥ÀÌÅÍ°¡ ÀÖ´Â ÃÖ½Å 10°³(ÀÏ)ÀÇ µ¥ÀÌÅÍ¸¸ Ãâ·Â
+	mysql_query(connection, query);		//mysql_query í•¨ìˆ˜ë¥¼ í†µí•´ connection(ì—°ê²° ì •ë³´)ì— ì¿¼ë¦¬ë¬¸ ì‹¤í–‰(DBì— ì €ìž¥ë˜ì–´ ìžˆëŠ” ì„ íƒí•œ ëª¨ë“œì— í•´ë‹¹í•˜ëŠ” íƒ€ì´í•‘ ë°ì´í„°ë¥¼ ë‚ ì§œë³„ë¡œ ê·¸ë£¹í™”í•˜ì—¬ ì¡°íšŒ)
+										//ë¨¼ ë‚ ì§œ ìˆœìœ¼ë¡œ ë°ì´í„°ê°€ ìžˆëŠ” ìµœì‹  10ê°œ(ì¼)ì˜ ë°ì´í„°ë§Œ ì¶œë ¥
 
-	result = mysql_store_result(connection);			//result¿¡ mysql_store_resultÇÔ¼ö¸¦ »ç¿ëÇÏ¿© connection(¿¬°áÁ¤º¸)ÀÇ ½ÇÇà °á°ú¸¦ ÀúÀå
+	result = mysql_store_result(connection);			//resultì— mysql_store_resultí•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ connection(ì—°ê²°ì •ë³´)ì˜ ì‹¤í–‰ ê²°ê³¼ë¥¼ ì €ìž¥
 
 	i = 0;
 
@@ -124,31 +124,31 @@ void viewChart(int cnt) {
 
 	while (((row = mysql_fetch_row(result)) != NULL) && i != 10) {			
 		gotoxy(12 + (i * 10), HEIGHT - 4);
-		printf("%s", row[4]);			//printf ÇÔ¼ö¸¦ »ç¿ëÇÏ¿© ³¯Â¥ Ãâ·Â(
+		printf("%s", row[4]);			//printf í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ ë‚ ì§œ ì¶œë ¥(
 		
-		grp = atoi(row[2]) / 50;			//50Å¸(Á¡) ´ç Ä­¾¿ ±â·Ï
+		grp = atoi(row[2]) / 50;			//50íƒ€(ì ) ë‹¹ ì¹¸ì”© ê¸°ë¡
 
-		if (grp > 20)								//ÃÖ´ë 1000Å¸ ±îÁö Ç¥Çö °¡´É(1000Å¸ º¸´Ù ³ôÀ» °æ¿ì 1000Å¸¿Í µ¿ÀÏ)
+		if (grp > 20)								//ìµœëŒ€ 1000íƒ€ ê¹Œì§€ í‘œí˜„ ê°€ëŠ¥(1000íƒ€ ë³´ë‹¤ ë†’ì„ ê²½ìš° 1000íƒ€ì™€ ë™ì¼)
 			grp = 20;
 
 		r = rand() % 6 + 9;
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), r);
-		for (j = 0; j < grp; j++) {					//¸·´ë Â÷Æ® Ãâ·Â
+		for (j = 0; j < grp; j++) {					//ë§‰ëŒ€ ì°¨íŠ¸ ì¶œë ¥
 			gotoxy(13 + (i * 10), HEIGHT - 6 - j);
-			printf("¡á");
+			printf("â– ");
 		}
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 
-		if (cnt != 2) {		//ÂªÀº±Û, ±ä±Û ¿¬½À
-			gotoxy(11 + (i * 10), HEIGHT - 27);			//Â÷Æ® ·¹ÀÌºí Ãâ·Â
-			printf("%sÅ¸", row[2]);						//(Å¸¼ö)
-			gotoxy(11 + (i * 10), HEIGHT - 26);			//(Á¤È®µµ)
+		if (cnt != 2) {		//ì§§ì€ê¸€, ê¸´ê¸€ ì—°ìŠµ
+			gotoxy(11 + (i * 10), HEIGHT - 27);			//ì°¨íŠ¸ ë ˆì´ë¸” ì¶œë ¥
+			printf("%síƒ€", row[2]);						//(íƒ€ìˆ˜)
+			gotoxy(11 + (i * 10), HEIGHT - 26);			//(ì •í™•ë„)
 			printf(" %s%%", row[3]);
 		}
-		else {				//»ê¼ººñ °ÔÀÓ
-			gotoxy(11 + (i * 10), HEIGHT - 26);			//Â÷Æ® ·¹ÀÌºí Ãâ·Â
-			printf("%sÁ¡", row[2]);	
+		else {				//ì‚°ì„±ë¹„ ê²Œìž„
+			gotoxy(11 + (i * 10), HEIGHT - 26);			//ì°¨íŠ¸ ë ˆì´ë¸” ì¶œë ¥
+			printf("%sì ", row[2]);	
 		}
 		
 		i++;

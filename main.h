@@ -1,35 +1,35 @@
-//¸ÅÅ©·Î »ó¼ö Á¤ÀÇ
-//Ã¢ÀÇ Å©±â Á¤ÀÇ
-#define WIDTH 120			//ÄÜ¼ÖÃ¢ÀÇ °¡·Î¿Í ¼¼·Î¸¦ ¸ÅÅ©·Î »ó¼ö·Î Á¤ÀÇ
+//ë§¤í¬ë¡œ ìƒìˆ˜ ì •ì˜
+//ì°½ì˜ í¬ê¸° ì •ì˜
+#define WIDTH 120			//ì½˜ì†”ì°½ì˜ ê°€ë¡œì™€ ì„¸ë¡œë¥¼ ë§¤í¬ë¡œ ìƒìˆ˜ë¡œ ì •ì˜
 #define HEIGHT 36
 
-//¾ÆÀÌµð¿Í ºñ¹Ð¹øÈ£ÀÇ ÃÖ´ë ÀÔ·Â ±ÛÀÚ(¹ÙÀÌÆ®) Á¤ÀÇ
-#define ID_SIZE 20				//¾ÆÀÌµð ÅØ½ºÆ®¹Ú½ºÀÇ ÃÖ´ë ÀÔ·Â Å©±â¸¦ ¸ÅÅ©·Î »ó¼ö·Î Á¤ÀÇ
-#define PW_SIZE 20				//ºñ¹Ð¹øÈ£ ÅØ½ºÆ®¹Ú½ºÀÇ ÃÖ´ë ÀÔ·Â Å©±â¸¦ ¸ÅÅ©·Î »ó¼ö·Î Á¤ÀÇ
+//ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ì˜ ìµœëŒ€ ìž…ë ¥ ê¸€ìž(ë°”ì´íŠ¸) ì •ì˜
+#define ID_SIZE 20				//ì•„ì´ë”” í…ìŠ¤íŠ¸ë°•ìŠ¤ì˜ ìµœëŒ€ ìž…ë ¥ í¬ê¸°ë¥¼ ë§¤í¬ë¡œ ìƒìˆ˜ë¡œ ì •ì˜
+#define PW_SIZE 20				//ë¹„ë°€ë²ˆí˜¸ í…ìŠ¤íŠ¸ë°•ìŠ¤ì˜ ìµœëŒ€ ìž…ë ¥ í¬ê¸°ë¥¼ ë§¤í¬ë¡œ ìƒìˆ˜ë¡œ ì •ì˜
 
-//Å° °ªÀ» ¸ÅÅ©·Î »ó¼ö·Î Á¤ÀÇ
+//í‚¤ ê°’ì„ ë§¤í¬ë¡œ ìƒìˆ˜ë¡œ ì •ì˜
 #define ESC_KEY 27
 #define ENTER_KEY 13
 #define BACKSPACE_KEY 8
 
-//DB Á¢¼Ó Á¤º¸ Á¤ÀÇ
-#include <mysql.h>						//mysql(µ¥ÀÌÅÍº£ÀÌ½º)ÀÇ ÇÔ¼öµéÀ» »ç¿ëÇÏ±â À§ÇÑ Çì´õÆÄÀÏÀ» Æ÷ÇÔ
-#pragma comment (lib, "libmysql.lib")	//libmysql.lib(¶óÀÌºê·¯¸®)¸¦ »ç¿ëÇÏ±â À§ÇØ ÇÁ·Î±×·¥ÀÇ Ãß°¡ Á¾¼Ó¼º¿¡ "libmysql.lib"À» Ãß°¡ÇØÁÖ´Â ÄÚµå
+//DB ì ‘ì† ì •ë³´ ì •ì˜
+#include <mysql.h>						//mysql(ë°ì´í„°ë² ì´ìŠ¤)ì˜ í•¨ìˆ˜ë“¤ì„ ì‚¬ìš©í•˜ê¸° ìœ„í•œ í—¤ë”íŒŒì¼ì„ í¬í•¨
+#pragma comment (lib, "libmysql.lib")	//libmysql.lib(ë¼ì´ë¸ŒëŸ¬ë¦¬)ë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´ í”„ë¡œê·¸ëž¨ì˜ ì¶”ê°€ ì¢…ì†ì„±ì— "libmysql.lib"ì„ ì¶”ê°€í•´ì£¼ëŠ” ì½”ë“œ
 
-#define DB_HOST "127.0.0.1"		//DB È£½ºÆ®ÀÇ ÁÖ¼Ò(DB IP)¸¦ ÀúÀå (127.0.0.1 = ÀÚ½ÅÀÇ ÄÄÇ»ÅÍ¸¦ ÀÇ¹Ì)
-#define DB_USER "root"			//DBÀÇ ¾ÆÀÌµð
-#define DB_PASS	"abc123"		//DBÀÇ ºñ¹Ð¹øÈ£
-#define DB_NAME "typingDB"			//DBÀÇ ÀÌ¸§
+#define DB_HOST "127.0.0.1"		//DB í˜¸ìŠ¤íŠ¸ì˜ ì£¼ì†Œ(DB IP)ë¥¼ ì €ìž¥ (127.0.0.1 = ìžì‹ ì˜ ì»´í“¨í„°ë¥¼ ì˜ë¯¸)
+#define DB_USER "root"			//DBì˜ ì•„ì´ë””
+#define DB_PASS	"abc123"		//DBì˜ ë¹„ë°€ë²ˆí˜¸
+#define DB_NAME "typingDB"			//DBì˜ ì´ë¦„
 
-MYSQL *connection;		//mysqlÀ» »ç¿ëÇÏ±â À§ÇØ MYSQL ±¸Á¶Ã¼ÀÇ Æ÷ÀÎÅÍ º¯¼ö ¼±¾ð(mysql_real_connect ÇÔ¼öÀÇ ¹ÝÈ¯°ª(ÁÖ¼Ò) ÀúÀå)
-MYSQL conn;				//mysql Á¢¼ÓÀ» À§ÇØ MYSQL ±¸Á¶Ã¼ º¯¼ö ¼±¾ð(mysql_real_connect ÇÔ¼öÀÇ ÀÎÀÚ·Î »ç¿ë)
-MYSQL_RES *result;		//mysqlÀ» »ç¿ëÇÒ ¶§ Äõ¸®ÀÇ ÀüÃ¼ °á°ú°ªÀ» ÀúÀåÇÏ±â À§ÇÑ MYSQL_RES ±¸Á¶Ã¼ÀÇ Æ÷ÀÎÅÍ º¯¼ö result ¼±¾ð(mysql_sotre_result ÇÔ¼öÀÇ ½ÃÀÛÁÖ¼Ò ÀúÀå)
-MYSQL_ROW row;			//mysqlÀ» »ç¿ëÇÒ ¶§ result¸¦ ÇÑ ÁÙ¾¿ ÀÐ¾î¿À±â À§ÇØ MYSQL_ROW ±¸Á¶Ã¼ º¯¼ö row¸¦ ¼±¾ð ÈÄ(mysql_fetch_row ÇÔ¼öÀÇ ¹ÝÈ¯°ª ÀúÀå)
-char query[255];		//Äõ¸®¹®À» ÀúÀåÇÏ±â À§ÇÑ charÇü ¹è¿­(¹®ÀÚ¿­) queryÀÇ Å©±â¸¦ 255·Î ¼±¾ð
-char login_id[20];		//·Î±×ÀÎ¿¡ ¼º°øÇßÀ» ¶§ ±× ¾ÆÀÌµð¸¦ ÀúÀåÇÏ±â À§ÇÑ charÇü ¹è¿­(¹®ÀÚ¿­) login_id ¼±¾ð
+MYSQL *connection;		//mysqlì„ ì‚¬ìš©í•˜ê¸° ìœ„í•´ MYSQL êµ¬ì¡°ì²´ì˜ í¬ì¸í„° ë³€ìˆ˜ ì„ ì–¸(mysql_real_connect í•¨ìˆ˜ì˜ ë°˜í™˜ê°’(ì£¼ì†Œ) ì €ìž¥)
+MYSQL conn;				//mysql ì ‘ì†ì„ ìœ„í•´ MYSQL êµ¬ì¡°ì²´ ë³€ìˆ˜ ì„ ì–¸(mysql_real_connect í•¨ìˆ˜ì˜ ì¸ìžë¡œ ì‚¬ìš©)
+MYSQL_RES *result;		//mysqlì„ ì‚¬ìš©í•  ë•Œ ì¿¼ë¦¬ì˜ ì „ì²´ ê²°ê³¼ê°’ì„ ì €ìž¥í•˜ê¸° ìœ„í•œ MYSQL_RES êµ¬ì¡°ì²´ì˜ í¬ì¸í„° ë³€ìˆ˜ result ì„ ì–¸(mysql_sotre_result í•¨ìˆ˜ì˜ ì‹œìž‘ì£¼ì†Œ ì €ìž¥)
+MYSQL_ROW row;			//mysqlì„ ì‚¬ìš©í•  ë•Œ resultë¥¼ í•œ ì¤„ì”© ì½ì–´ì˜¤ê¸° ìœ„í•´ MYSQL_ROW êµ¬ì¡°ì²´ ë³€ìˆ˜ rowë¥¼ ì„ ì–¸ í›„(mysql_fetch_row í•¨ìˆ˜ì˜ ë°˜í™˜ê°’ ì €ìž¥)
+char query[255];		//ì¿¼ë¦¬ë¬¸ì„ ì €ìž¥í•˜ê¸° ìœ„í•œ charí˜• ë°°ì—´(ë¬¸ìžì—´) queryì˜ í¬ê¸°ë¥¼ 255ë¡œ ì„ ì–¸
+char login_id[20];		//ë¡œê·¸ì¸ì— ì„±ê³µí–ˆì„ ë•Œ ê·¸ ì•„ì´ë””ë¥¼ ì €ìž¥í•˜ê¸° ìœ„í•œ charí˜• ë°°ì—´(ë¬¸ìžì—´) login_id ì„ ì–¸
 
-//»ç¿ëÀÚ°¡ Å¸ÀÌÇÎÇÑ °á°ú¸¦ ÀúÀå ¹× Ãâ·ÂÇÏ±â À§ÇØ ±¸Á¶Ã¼ Æ÷ÀÎÅÍ·Î »ç¿ëµÉ ±¸Á¶Ã¼ typingData ¼±¾ð(TA·Î ÀçÁ¤ÀÇ)
-#ifndef _TA_						//Á¶°ÇºÎ ÄÄÆÄÀÏÀ» ÅëÇØ ±¸Á¶Ã¼ Áßº¹ ¼±¾ðÀ» ¹æÁö
+//ì‚¬ìš©ìžê°€ íƒ€ì´í•‘í•œ ê²°ê³¼ë¥¼ ì €ìž¥ ë° ì¶œë ¥í•˜ê¸° ìœ„í•´ êµ¬ì¡°ì²´ í¬ì¸í„°ë¡œ ì‚¬ìš©ë  êµ¬ì¡°ì²´ typingData ì„ ì–¸(TAë¡œ ìž¬ì •ì˜)
+#ifndef _TA_						//ì¡°ê±´ë¶€ ì»´íŒŒì¼ì„ í†µí•´ êµ¬ì¡°ì²´ ì¤‘ë³µ ì„ ì–¸ì„ ë°©ì§€
 #define _TA_
 
 typedef struct typingData {

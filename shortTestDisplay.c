@@ -1,78 +1,78 @@
-#define _CRT_SECURE_NO_WARNINGS		//ÀüÃ³¸®±â(#) ÇÁ·Î±×·¥ ½ÇÇà¿¡ »ç¿ëµÇ´Â ¸ÅÅ©·Î¿Í Çì´õÆÄÀÏ ¼±¾ğ
-#include <stdio.h>					//Ç¥ÁØÀÔÃâ·Â ÇÔ¼ö Çì´õÆÄÀÏ
-#include <conio.h>					//ÄÜ¼ÖÀÔÃâ·Â ÇÔ¼ö Çì´õÆÄÀÏ
-#include <string.h>					//Ç¥ÁØ ¹®ÀÚ¿­ ÇÔ¼ö Çì´õÆÄÀÏ
+#define _CRT_SECURE_NO_WARNINGS		//ì „ì²˜ë¦¬ê¸°(#) í”„ë¡œê·¸ë¨ ì‹¤í–‰ì— ì‚¬ìš©ë˜ëŠ” ë§¤í¬ë¡œì™€ í—¤ë”íŒŒì¼ ì„ ì–¸
+#include <stdio.h>					//í‘œì¤€ì…ì¶œë ¥ í•¨ìˆ˜ í—¤ë”íŒŒì¼
+#include <conio.h>					//ì½˜ì†”ì…ì¶œë ¥ í•¨ìˆ˜ í—¤ë”íŒŒì¼
+#include <string.h>					//í‘œì¤€ ë¬¸ìì—´ í•¨ìˆ˜ í—¤ë”íŒŒì¼
 #include <windows.h>
 #include <stdlib.h>					
 #include <time.h>
 #include <math.h>
 
-#include "main.h"					//main.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
-#include "console.h"				//console.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
-#include "drawing.h"				//drawing.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
-#include "text.h"					//text.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
+#include "main.h"					//main.h ì‚¬ìš©ì í—¤ë”íŒŒì¼ í¬í•¨
+#include "console.h"				//console.h ì‚¬ìš©ì í—¤ë”íŒŒì¼ í¬í•¨
+#include "drawing.h"				//drawing.h ì‚¬ìš©ì í—¤ë”íŒŒì¼ í¬í•¨
+#include "text.h"					//text.h ì‚¬ìš©ì í—¤ë”íŒŒì¼ í¬í•¨
 
-//ÂªÀº ±Û ¿¬½À È­¸éÀ» Ãâ·ÂÇÏ´Â ÇÔ¼ö
+//ì§§ì€ ê¸€ ì—°ìŠµ í™”ë©´ì„ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 void shortTestDisplay() {
 	/*char texts[][];*/
-	char text[WIDTH - 10];		//DB¿¡ ÀúÀåµÇ¾î ÀÖ´Â ¹®Àå(»ç¿ëÀÚ°¡ ÀÔ·ÂÇÒ ¹®Àå)À» Ãâ·ÂÇÒ charÇü ¹è¿­ text
-	char user[WIDTH - 10];		//»ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ ¹®ÀåÀ» ÀúÀåÇÒ charÇü ¹è¿­ user
-	FILE *fp;					//ÂªÀº ±ÛÀÌ ÀúÀåµÇ¾î ÀÖ´Â ÆÄÀÏÀ» ºÒ·¯¿À±â À§ÇÑ ±¸Á¶Ã¼ ÆÄÀÏ Æ÷ÀÎÅÍ Á¤ÀÇ
+	char text[WIDTH - 10];		//DBì— ì €ì¥ë˜ì–´ ìˆëŠ” ë¬¸ì¥(ì‚¬ìš©ìê°€ ì…ë ¥í•  ë¬¸ì¥)ì„ ì¶œë ¥í•  charí˜• ë°°ì—´ text
+	char user[WIDTH - 10];		//ì‚¬ìš©ìê°€ ì…ë ¥í•œ ë¬¸ì¥ì„ ì €ì¥í•  charí˜• ë°°ì—´ user
+	FILE *fp;					//ì§§ì€ ê¸€ì´ ì €ì¥ë˜ì–´ ìˆëŠ” íŒŒì¼ì„ ë¶ˆëŸ¬ì˜¤ê¸° ìœ„í•œ êµ¬ì¡°ì²´ íŒŒì¼ í¬ì¸í„° ì •ì˜
 	char filepath[255] = { 0 };
 	TA data;
 
-	system("cls");					//systemÇÔ¼ö·Î È­¸é ÃÊ±âÈ­
+	system("cls");					//systemí•¨ìˆ˜ë¡œ í™”ë©´ ì´ˆê¸°í™”
 
-	consoleShow();				//»ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö consoleShow ÇÔ¼ö·Î ÄÜ¼ÖÀ» ÁöÁ¤µÈ Å©±â·Î ¿®
-	drawingBorder();			//»ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö·Î Å×µÎ¸® Ãâ·Â
-	drawingIdtag();	//·Î±×ÀÎ ÇÑ ID Ãâ·Â(¹Ì¿Ï¼º)
+	consoleShow();				//ì‚¬ìš©ì ì§€ì • í•¨ìˆ˜ consoleShow í•¨ìˆ˜ë¡œ ì½˜ì†”ì„ ì§€ì •ëœ í¬ê¸°ë¡œ ì—¶
+	drawingBorder();			//ì‚¬ìš©ì ì§€ì • í•¨ìˆ˜ë¡œ í…Œë‘ë¦¬ ì¶œë ¥
+	drawingIdtag();	//ë¡œê·¸ì¸ í•œ ID ì¶œë ¥(ë¯¸ì™„ì„±)
 
-	drawingTestTextbox(12);			//¹®Àå ¹Ú½º Ãâ·Â
-	drawingTestTextbox(15);			//ÀÔ·Â ¹Ú½º Ãâ·Â
+	drawingTestTextbox(12);			//ë¬¸ì¥ ë°•ìŠ¤ ì¶œë ¥
+	drawingTestTextbox(15);			//ì…ë ¥ ë°•ìŠ¤ ì¶œë ¥
 
-	gotoxy(6, 10);				//Å¸¼ö Ãâ·ÂÀ» À§ÇÑ ÁÂÇ¥ º¯°æ
-	printf("Å¸¼ö : %4d Å¸", 0);		//Å¸¼ö Ãâ·Â
+	gotoxy(6, 10);				//íƒ€ìˆ˜ ì¶œë ¥ì„ ìœ„í•œ ì¢Œí‘œ ë³€ê²½
+	printf("íƒ€ìˆ˜ : %4d íƒ€", 0);		//íƒ€ìˆ˜ ì¶œë ¥
 
-	gotoxy(40, 10);				//Á¤È®µµ Ãâ·ÂÀ» À§ÇÑ ÁÂÇ¥ º¯°æ
-	printf("Á¤È®µµ : %3d %%", 0);	//Á¤È®µµ Ãâ·Â
+	gotoxy(40, 10);				//ì •í™•ë„ ì¶œë ¥ì„ ìœ„í•œ ì¢Œí‘œ ë³€ê²½
+	printf("ì •í™•ë„ : %3d %%", 0);	//ì •í™•ë„ ì¶œë ¥
 
-	sprintf(query, "select * from file where events_id = '1' and language = 'eng'");		//sprintf ÇÔ¼ö¸¦ ÅëÇØ query¿¡ Äõ¸®¹®À» ÀúÀå
+	sprintf(query, "select * from file where events_id = '1' and language = 'eng'");		//sprintf í•¨ìˆ˜ë¥¼ í†µí•´ queryì— ì¿¼ë¦¬ë¬¸ì„ ì €ì¥
 
-	mysql_query(connection, query);		//mysql_query ÇÔ¼ö¸¦ ÅëÇØ connection(¿¬°á Á¤º¸)¿¡ Äõ¸®¹® ½ÇÇà(select¹®À» ÅëÇØ ÇÑ±Û ÂªÀº±Û ÆÄÀÏÀÇ ÀÌ¸§À» Á¶È¸)
+	mysql_query(connection, query);		//mysql_query í•¨ìˆ˜ë¥¼ í†µí•´ connection(ì—°ê²° ì •ë³´)ì— ì¿¼ë¦¬ë¬¸ ì‹¤í–‰(selectë¬¸ì„ í†µí•´ í•œê¸€ ì§§ì€ê¸€ íŒŒì¼ì˜ ì´ë¦„ì„ ì¡°íšŒ)
 
-	result = mysql_store_result(connection);			//result¿¡ mysql_store_resultÇÔ¼ö¸¦ »ç¿ëÇÏ¿© connection(¿¬°áÁ¤º¸)ÀÇ ½ÇÇà °á°ú¸¦ ÀúÀå
+	result = mysql_store_result(connection);			//resultì— mysql_store_resultí•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ connection(ì—°ê²°ì •ë³´)ì˜ ì‹¤í–‰ ê²°ê³¼ë¥¼ ì €ì¥
 
-	row = mysql_fetch_row(result);						//ÇÑ Çà ¾¿ ½ÇÇà°á°ú¸¦ ÀĞ¾î¿È
+	row = mysql_fetch_row(result);						//í•œ í–‰ ì”© ì‹¤í–‰ê²°ê³¼ë¥¼ ì½ì–´ì˜´
 
-	sprintf(filepath, "ÂªÀº ±Û\\%s", row[3]);			//¹è¿­¿¡ DB¿¡ ÀúÀåµÇ¾î ÀÖ´Â ÆÄÀÏ¸í°ú ÆÄÀÏ °æ·Î ÀúÀå
+	sprintf(filepath, "ì§§ì€ ê¸€\\%s", row[3]);			//ë°°ì—´ì— DBì— ì €ì¥ë˜ì–´ ìˆëŠ” íŒŒì¼ëª…ê³¼ íŒŒì¼ ê²½ë¡œ ì €ì¥
 
 	if ((fp = fopen(filepath, "r")) == NULL) {
-		fprintf(stderr, "ÆÄÀÏ ¿­±â ½ÇÆĞ!\n");
+		fprintf(stderr, "íŒŒì¼ ì—´ê¸° ì‹¤íŒ¨!\n");
 		return;
 	}
 
-	while (1) {				//¹«ÇÑ ¹İº¹(EscÅ°¸¦ ´©¸£±â Àü±îÁö)
-		if (!feof(fp)) {											//´ÙÀ½ ÁÙÀÌ ÀÖÀ» °æ¿ì ¹®ÀåÀ» ÀĞ¾î¿Â´Ù
-			fgets(text, WIDTH - 10, fp);							//(¹è¿­ text¿¡ ÀúÀå)
+	while (1) {				//ë¬´í•œ ë°˜ë³µ(Escí‚¤ë¥¼ ëˆ„ë¥´ê¸° ì „ê¹Œì§€)
+		if (!feof(fp)) {											//ë‹¤ìŒ ì¤„ì´ ìˆì„ ê²½ìš° ë¬¸ì¥ì„ ì½ì–´ì˜¨ë‹¤
+			fgets(text, WIDTH - 10, fp);							//(ë°°ì—´ textì— ì €ì¥)
 		} 
 		else {
-			//¸ŞÀÎÀ¸·Î µ¹¾Æ°¡±â
+			//ë©”ì¸ìœ¼ë¡œ ëŒì•„ê°€ê¸°
 			break;
 		}
 		
-		gotoxy(6, 12);												//¹®Àå Ãâ·ÂÀ» À§ÇÑ ÁÂÇ¥ º¯°æ
-		printf("%s", text);											//¹®Àå Ãâ·Â//¹®ÀåÀ» text¿¡ ÀúÀå(ÃßÈÄ DBÀÇ ¹®ÀåÀ» ÀĞ¾î¿À´Â ºÎºĞÀ¸·Î º¯°æÇÒ ¿¹Á¤)
+		gotoxy(6, 12);												//ë¬¸ì¥ ì¶œë ¥ì„ ìœ„í•œ ì¢Œí‘œ ë³€ê²½
+		printf("%s", text);											//ë¬¸ì¥ ì¶œë ¥//ë¬¸ì¥ì„ textì— ì €ì¥(ì¶”í›„ DBì˜ ë¬¸ì¥ì„ ì½ì–´ì˜¤ëŠ” ë¶€ë¶„ìœ¼ë¡œ ë³€ê²½í•  ì˜ˆì •)
 
 		gotoxy(6, 15);
-		if (get_Typing(text, user, &data, 1) == -1)									//¹®ÀÚ¸¦ ÀÔ·Â ¹Ş°í ¹İÈ¯°ªÀÌ -1ÀÎ °æ¿ì(EscÀÔ·Â)
-			break;													//¹İº¹¹® Á¾·á(¸Ş´º È­¸éÀ¸·Î µ¹¾Æ°¨)
+		if (get_Typing(text, user, &data, 1) == -1)									//ë¬¸ìë¥¼ ì…ë ¥ ë°›ê³  ë°˜í™˜ê°’ì´ -1ì¸ ê²½ìš°(Escì…ë ¥)
+			break;													//ë°˜ë³µë¬¸ ì¢…ë£Œ(ë©”ë‰´ í™”ë©´ìœ¼ë¡œ ëŒì•„ê°)
 
-		sprintf(query, "insert into typing VALUES ('%s', 1, %d, %d, curdate())", login_id, data.speed, data.percent);		//sprintf ÇÔ¼ö¸¦ ÅëÇØ query¿¡ Äõ¸®¹®À» ÀúÀå
+		sprintf(query, "insert into typing VALUES ('%s', 1, %d, %d, curdate())", login_id, data.speed, data.percent);		//sprintf í•¨ìˆ˜ë¥¼ í†µí•´ queryì— ì¿¼ë¦¬ë¬¸ì„ ì €ì¥
 
-		mysql_query(connection, query);		//mysql_query ÇÔ¼ö¸¦ ÅëÇØ connection(¿¬°á Á¤º¸)¿¡ Äõ¸®¹® ½ÇÇà(insert¹®À¸·Î Å¸ÀÌÇÎ Á¤º¸ ÀúÀå)
+		mysql_query(connection, query);		//mysql_query í•¨ìˆ˜ë¥¼ í†µí•´ connection(ì—°ê²° ì •ë³´)ì— ì¿¼ë¦¬ë¬¸ ì‹¤í–‰(insertë¬¸ìœ¼ë¡œ íƒ€ì´í•‘ ì •ë³´ ì €ì¥)
 
-		testTextboxClear(12);		//ÀÔ·ÂÇÒ ¹®ÀåÀÌ ÀÖ´Â ÅØ½ºÆ®¹Ú½º ÃÊ±âÈ­
-		testTextboxClear(15);		//ÀÔ·ÂÇÑ ¹®ÀåÀÌ ÀÖ´Â ÅØ½ºÆ®¹Ú½º ÃÊ±âÈ­
+		testTextboxClear(12);		//ì…ë ¥í•  ë¬¸ì¥ì´ ìˆëŠ” í…ìŠ¤íŠ¸ë°•ìŠ¤ ì´ˆê¸°í™”
+		testTextboxClear(15);		//ì…ë ¥í•œ ë¬¸ì¥ì´ ìˆëŠ” í…ìŠ¤íŠ¸ë°•ìŠ¤ ì´ˆê¸°í™”
 	}
 	fclose(fp);
 }

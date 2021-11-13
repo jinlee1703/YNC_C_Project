@@ -1,69 +1,69 @@
-#define _CRT_SECURE_NO_WARNINGS		//ÀüÃ³¸®±â(#) ÇÁ·Î±×·¥ ½ÇÇà¿¡ »ç¿ëµÇ´Â ¸ÅÅ©·Î¿Í Çì´õÆÄÀÏ ¼±¾ð
-#include <stdio.h>					//Ç¥ÁØÀÔÃâ·Â ÇÔ¼ö Çì´õÆÄÀÏ
-#include <conio.h>					//ÄÜ¼Ö ÀÔÃâ·Â Çì´õÆÄÀÏ
-#include <string.h>					//Ç¥ÁØ ¹®ÀÚ¿­ ÇÔ¼ö Çì´õÆÄÀÏ
-#include <stdlib.h>					//Ç¥ÁØ ¶óÀÌºê·¯¸® Çì´õÆÄÀÏ
-#include <Windows.h>				//À©µµ¿ì ÀÀ¿ë ÇÁ·Î±×·¥À» À§ÇÑ Çì´õÆÄÀÏ
+#define _CRT_SECURE_NO_WARNINGS		//ì „ì²˜ë¦¬ê¸°(#) í”„ë¡œê·¸ëž¨ ì‹¤í–‰ì— ì‚¬ìš©ë˜ëŠ” ë§¤í¬ë¡œì™€ í—¤ë”íŒŒì¼ ì„ ì–¸
+#include <stdio.h>					//í‘œì¤€ìž…ì¶œë ¥ í•¨ìˆ˜ í—¤ë”íŒŒì¼
+#include <conio.h>					//ì½˜ì†” ìž…ì¶œë ¥ í—¤ë”íŒŒì¼
+#include <string.h>					//í‘œì¤€ ë¬¸ìžì—´ í•¨ìˆ˜ í—¤ë”íŒŒì¼
+#include <stdlib.h>					//í‘œì¤€ ë¼ì´ë¸ŒëŸ¬ë¦¬ í—¤ë”íŒŒì¼
+#include <Windows.h>				//ìœˆë„ìš° ì‘ìš© í”„ë¡œê·¸ëž¨ì„ ìœ„í•œ í—¤ë”íŒŒì¼
 
-#include "console.h"		//console.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
-#include "drawing.h"		//drawing.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
-#include "text.h"			//text.h »ç¿ëÀÚ Çì´õÆÄÀÏ Æ÷ÇÔ
+#include "console.h"		//console.h ì‚¬ìš©ìž í—¤ë”íŒŒì¼ í¬í•¨
+#include "drawing.h"		//drawing.h ì‚¬ìš©ìž í—¤ë”íŒŒì¼ í¬í•¨
+#include "text.h"			//text.h ì‚¬ìš©ìž í—¤ë”íŒŒì¼ í¬í•¨
 
-//»ç¿ëÀÚ ÇÔ¼ö ¼±¾ð
-int mainDisplay();				//[¸ÞÀÎ È­¸é]
-void signupDisplay();			//[È¸¿ø°¡ÀÔ È­¸é]
-int menuDisplay();				//[¸Þ´º ¼±ÅÃ È­¸é]
-void menuSelect();				//¸Þ´º ¼±ÅÃ ÇÔ¼ö
+//ì‚¬ìš©ìž í•¨ìˆ˜ ì„ ì–¸
+int mainDisplay();				//[ë©”ì¸ í™”ë©´]
+void signupDisplay();			//[íšŒì›ê°€ìž… í™”ë©´]
+int menuDisplay();				//[ë©”ë‰´ ì„ íƒ í™”ë©´]
+void menuSelect();				//ë©”ë‰´ ì„ íƒ í•¨ìˆ˜
 
-int loginDisplay();				//[·Î±×ÀÎ] È­¸é
-void shortTestDisplay();		//[ÂªÀº ±Û ¿¬½À] ¸Þ´º
-void longTestDisplay();			//[±ä ±Û ¿¬½À] ¸Þ´º
-void acidrainGame();			//[»ê¼ººñ °ÔÀÓ] ¸Þ´º
-void viewRanking();				//[·©Å· º¸±â] ¸Þ´º
+int loginDisplay();				//[ë¡œê·¸ì¸] í™”ë©´
+void shortTestDisplay();		//[ì§§ì€ ê¸€ ì—°ìŠµ] ë©”ë‰´
+void longTestDisplay();			//[ê¸´ ê¸€ ì—°ìŠµ] ë©”ë‰´
+void acidrainGame();			//[ì‚°ì„±ë¹„ ê²Œìž„] ë©”ë‰´
+void viewRanking();				//[ëž­í‚¹ ë³´ê¸°] ë©”ë‰´
 
-//¸ÞÀÎ ÇÔ¼ö
+//ë©”ì¸ í•¨ìˆ˜
 int main(void) {
-	int main_select = 0;		//mainDisplay¿¡¼­ ¹«¾ùÀ» ¼±ÅÃÇÏ¿´´ÂÁö(·Î±×ÀÎor È¸¿ø°¡ÀÔ) ÀúÀåÇÏ´Â º¯¼ö ¼±¾ð
+	int main_select = 0;		//mainDisplayì—ì„œ ë¬´ì—‡ì„ ì„ íƒí•˜ì˜€ëŠ”ì§€(ë¡œê·¸ì¸or íšŒì›ê°€ìž…) ì €ìž¥í•˜ëŠ” ë³€ìˆ˜ ì„ ì–¸
 	
-	mysql_init(&conn);				//mysql_init ÇÔ¼ö¸¦ ÅëÇØ MYSQL ±¸Á¶Ã¼ º¯¼ö conn(ÁÖ¼Ò)¸¦ ÀÎÀÚ·Î ¹Þ¾Æ ÃÊ±âÈ­
+	mysql_init(&conn);				//mysql_init í•¨ìˆ˜ë¥¼ í†µí•´ MYSQL êµ¬ì¡°ì²´ ë³€ìˆ˜ conn(ì£¼ì†Œ)ë¥¼ ì¸ìžë¡œ ë°›ì•„ ì´ˆê¸°í™”
 
-	//mysq_real_connect ÇÔ¼ö Çü½Ä : mysql_real_connect(MYSQL ±¸Á¶Ã¼, DBÁÖ¼Ò, DB ID, DB PASSWORD, DB ÀÌ¸§, Æ÷Æ®¹øÈ£, ¼ÒÄÏ, º¸¾È(flag))
-	connection = mysql_real_connect(&conn, DB_HOST, DB_USER, DB_PASS, DB_NAME, 3306, (char *)NULL, 0);	//mysql_real_connect ÇÔ¼ö¸¦ ÅëÇØ MYSQL¿¡ ¿¬°áÀ» ½ÃµµÇÏ¿© °á°úÀÇ ÁÖ¼Ò¸¦ connection¿¡ ÀúÀå
+	//mysq_real_connect í•¨ìˆ˜ í˜•ì‹ : mysql_real_connect(MYSQL êµ¬ì¡°ì²´, DBì£¼ì†Œ, DB ID, DB PASSWORD, DB ì´ë¦„, í¬íŠ¸ë²ˆí˜¸, ì†Œì¼“, ë³´ì•ˆ(flag))
+	connection = mysql_real_connect(&conn, DB_HOST, DB_USER, DB_PASS, DB_NAME, 3306, (char *)NULL, 0);	//mysql_real_connect í•¨ìˆ˜ë¥¼ í†µí•´ MYSQLì— ì—°ê²°ì„ ì‹œë„í•˜ì—¬ ê²°ê³¼ì˜ ì£¼ì†Œë¥¼ connectionì— ì €ìž¥
 
-	if (connection == NULL) {					//connectionÀÌ NULLÀÏ °æ¿ì(¿¬°á ½ÇÆÐ, ÇØ´çÇÏ´Â ¿¬°áÁ¤º¸°¡ ¾øÀ½)
-		fprintf(stderr, "error : %s", mysql_error(&conn));		//fprintf ÇÔ¼ö¸¦ ÅëÇØ ¹öÆÛ¾øÀÌ(stderr) mysql_error(&connÀÇ ¿¡·¯ ¸Þ½ÃÁö ¹®ÀÚ¿­ ¸®ÅÏ)·Î ¹ÝÈ¯µÈ ¿¡·¯ ¸Þ½ÃÁö(¿øÀÎ) Ãâ·Â
-		return 1;												//main ÇÔ¼ö Á¾·á
+	if (connection == NULL) {					//connectionì´ NULLì¼ ê²½ìš°(ì—°ê²° ì‹¤íŒ¨, í•´ë‹¹í•˜ëŠ” ì—°ê²°ì •ë³´ê°€ ì—†ìŒ)
+		fprintf(stderr, "error : %s", mysql_error(&conn));		//fprintf í•¨ìˆ˜ë¥¼ í†µí•´ ë²„í¼ì—†ì´(stderr) mysql_error(&connì˜ ì—ëŸ¬ ë©”ì‹œì§€ ë¬¸ìžì—´ ë¦¬í„´)ë¡œ ë°˜í™˜ëœ ì—ëŸ¬ ë©”ì‹œì§€(ì›ì¸) ì¶œë ¥
+		return 1;												//main í•¨ìˆ˜ ì¢…ë£Œ
 	}
 
 	while (1) {
-		main_select = mainDisplay();			//[¸ÞÀÎ È­¸é]¿¡¼­ [·Î±×ÀÎ,È¸¿ø°¡ÀÔ] ¼±ÅÃ ¿©ºÎ ÀúÀå
+		main_select = mainDisplay();			//[ë©”ì¸ í™”ë©´]ì—ì„œ [ë¡œê·¸ì¸,íšŒì›ê°€ìž…] ì„ íƒ ì—¬ë¶€ ì €ìž¥
 		
-		if (main_select == 0) {								//[¸ÞÀÎ È­¸é]¿¡¼­ [·Î±×ÀÎ] ¼±ÅÃ ½Ã
-			if (loginDisplay() == 0) {						//·Î±×ÀÎ È­¸éÀÌ 0À» ¹ÝÈ¯ÇßÀ» ¶§(·Î±×ÀÎ ¼º°ø, DB¿¡¼­ È¸¿øÁ¤º¸¸¦ Á¶È¸ÇØ¼­ ·Î±×ÀÎ)
-menu:			switch (menuDisplay()) {						//¸Þ´º È­¸é (¾î¶² ¸Þ´ºµçÁö esc¸¦ ´©¸¦ °æ¿ì ¸Þ´º ¼±ÅÃÈ­¸éÀ¸·Î µ¹¾Æ°¨)
-				case 0:											//[¸Þ´º ¼±ÅÃÈ­¸é]¿¡¼­ [ÂªÀº±Û ¿¬½À] ¼±ÅÃ ½Ã
-					shortTestDisplay();							//[ÂªÀº ±Û ¿¬½À È­¸é]À» ºÒ·¯¿À°í, Á¾·áµÇ¸é(ESCÅ°¸¦ ÀÔ·ÂÇÏ¸é) ´Ù½Ã [¸Þ´º ¼±ÅÃ] È­¸éÀ¸·Î ÀÌµ¿
+		if (main_select == 0) {								//[ë©”ì¸ í™”ë©´]ì—ì„œ [ë¡œê·¸ì¸] ì„ íƒ ì‹œ
+			if (loginDisplay() == 0) {						//ë¡œê·¸ì¸ í™”ë©´ì´ 0ì„ ë°˜í™˜í–ˆì„ ë•Œ(ë¡œê·¸ì¸ ì„±ê³µ, DBì—ì„œ íšŒì›ì •ë³´ë¥¼ ì¡°íšŒí•´ì„œ ë¡œê·¸ì¸)
+menu:			switch (menuDisplay()) {						//ë©”ë‰´ í™”ë©´ (ì–´ë–¤ ë©”ë‰´ë“ ì§€ escë¥¼ ëˆ„ë¥¼ ê²½ìš° ë©”ë‰´ ì„ íƒí™”ë©´ìœ¼ë¡œ ëŒì•„ê°)
+				case 0:											//[ë©”ë‰´ ì„ íƒí™”ë©´]ì—ì„œ [ì§§ì€ê¸€ ì—°ìŠµ] ì„ íƒ ì‹œ
+					shortTestDisplay();							//[ì§§ì€ ê¸€ ì—°ìŠµ í™”ë©´]ì„ ë¶ˆëŸ¬ì˜¤ê³ , ì¢…ë£Œë˜ë©´(ESCí‚¤ë¥¼ ìž…ë ¥í•˜ë©´) ë‹¤ì‹œ [ë©”ë‰´ ì„ íƒ] í™”ë©´ìœ¼ë¡œ ì´ë™
 					goto menu;
-				case 1:											//[¸Þ´º ¼±ÅÃÈ­¸é]¿¡¼­ [±ä ±Û ¿¬½À] ¼±ÅÃ ½Ã
-					longTestDisplay();					//[±ä ±Û ¿¬½À È­¸é]À» ºÒ·¯¿À°í, Á¾·áµÇ¸é(ESCÅ°¸¦ ÀÔ·ÂÇÏ¸é) ´Ù½Ã [¸Þ´º ¼±ÅÃ] È­¸éÀ¸·Î ÀÌµ¿
+				case 1:											//[ë©”ë‰´ ì„ íƒí™”ë©´]ì—ì„œ [ê¸´ ê¸€ ì—°ìŠµ] ì„ íƒ ì‹œ
+					longTestDisplay();					//[ê¸´ ê¸€ ì—°ìŠµ í™”ë©´]ì„ ë¶ˆëŸ¬ì˜¤ê³ , ì¢…ë£Œë˜ë©´(ESCí‚¤ë¥¼ ìž…ë ¥í•˜ë©´) ë‹¤ì‹œ [ë©”ë‰´ ì„ íƒ] í™”ë©´ìœ¼ë¡œ ì´ë™
 					goto menu;
-				case 2:											//[¸Þ´º ¼±ÅÃÈ­¸é]¿¡¼­ [»ê¼ººñ °ÔÀÓ] ¼±ÅÃ ½Ã
-					acidrainGame();								//[»ê¼ººñ °ÔÀÓ È­¸é]À» ºÒ·¯¿À°í, Á¾·áµÇ¸é ´Ù½Ã [¸Þ´º ¼±ÅÃ] È­¸éÀ¸·Î ÀÌµ¿
+				case 2:											//[ë©”ë‰´ ì„ íƒí™”ë©´]ì—ì„œ [ì‚°ì„±ë¹„ ê²Œìž„] ì„ íƒ ì‹œ
+					acidrainGame();								//[ì‚°ì„±ë¹„ ê²Œìž„ í™”ë©´]ì„ ë¶ˆëŸ¬ì˜¤ê³ , ì¢…ë£Œë˜ë©´ ë‹¤ì‹œ [ë©”ë‰´ ì„ íƒ] í™”ë©´ìœ¼ë¡œ ì´ë™
 					goto menu;
-				case 3:											//[¸Þ´º ¼±ÅÃÈ­¸é]¿¡¼­ [·©Å· º¸±â] ¼±ÅÃ ½Ã
-					viewRanking();								//[·©Å· º¸±â È­¸é]À» ºÒ·¯¿À°í, Á¾·áµÇ¸é(ESCÅ°¸¦ ÀÔ·ÂÇÏ¸é) ´Ù½Ã [¸Þ´º ¼±ÅÃ] È­¸éÀ¸·Î ÀÌµ¿
+				case 3:											//[ë©”ë‰´ ì„ íƒí™”ë©´]ì—ì„œ [ëž­í‚¹ ë³´ê¸°] ì„ íƒ ì‹œ
+					viewRanking();								//[ëž­í‚¹ ë³´ê¸° í™”ë©´]ì„ ë¶ˆëŸ¬ì˜¤ê³ , ì¢…ë£Œë˜ë©´(ESCí‚¤ë¥¼ ìž…ë ¥í•˜ë©´) ë‹¤ì‹œ [ë©”ë‰´ ì„ íƒ] í™”ë©´ìœ¼ë¡œ ì´ë™
 					goto menu;
-				case 4:											//[¸Þ´º ¼±ÅÃÈ­¸é]¿¡¼­ ESCÅ° ÀÔ·Â ½Ã ¸ÞÀÎ È­¸éÀ¸·Î ÀÌµ¿
+				case 4:											//[ë©”ë‰´ ì„ íƒí™”ë©´]ì—ì„œ ESCí‚¤ ìž…ë ¥ ì‹œ ë©”ì¸ í™”ë©´ìœ¼ë¡œ ì´ë™
 					continue;
 				}
 			}
-			else {												//±× ¿Ü ¸ÞÀÎ È­¸éÀ¸·Î ÀÌµ¿ : ex) [¸Þ´º ¼±ÅÃÈ­¸é]¿¡¼­ ESC Å° ÀÔ·Â ½Ã
+			else {												//ê·¸ ì™¸ ë©”ì¸ í™”ë©´ìœ¼ë¡œ ì´ë™ : ex) [ë©”ë‰´ ì„ íƒí™”ë©´]ì—ì„œ ESC í‚¤ ìž…ë ¥ ì‹œ
 				continue;
 			}
 		}
-		else if (main_select == 1) {						//¸ÞÀÎ È­¸é¿¡¼­ [È¸¿ø°¡ÀÔ] ¼±ÅÃ ½Ã
-			signupDisplay();					//[È¸¿ø°¡ÀÔ È­¸é] ºÒ·¯¿È
-			continue;											//È¸¿ø°¡ÀÔ Á¾·á(¼º°ø or ½ÇÆÐ) ½Ã ´Ù½Ã ¸ÞÀÎ È­¸éÀ¸·Î ÀÌµ¿
+		else if (main_select == 1) {						//ë©”ì¸ í™”ë©´ì—ì„œ [íšŒì›ê°€ìž…] ì„ íƒ ì‹œ
+			signupDisplay();					//[íšŒì›ê°€ìž… í™”ë©´] ë¶ˆëŸ¬ì˜´
+			continue;											//íšŒì›ê°€ìž… ì¢…ë£Œ(ì„±ê³µ or ì‹¤íŒ¨) ì‹œ ë‹¤ì‹œ ë©”ì¸ í™”ë©´ìœ¼ë¡œ ì´ë™
 		}
 	}
 
